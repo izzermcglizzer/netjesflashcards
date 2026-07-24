@@ -1,0 +1,20 @@
+[
+  {
+    "id": "deck1",
+    "label": "Level 1: Basics",
+    "order": 1,
+    "noteCount": 500
+  },
+  {
+    "id": "deck2",
+    "label": "Level 2: Everyday Dutch",
+    "order": 2,
+    "noteCount": 1000
+  },
+  {
+    "id": "deck3",
+    "label": "Level 3: Advanced",
+    "order": 3,
+    "noteCount": 1000
+  }
+]

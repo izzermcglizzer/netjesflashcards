@@ -1,0 +1,76 @@
+@import "tailwindcss";
+@import "@fontsource/nunito/400.css";
+@import "@fontsource/nunito/600.css";
+@import "@fontsource/nunito/700.css";
+@import "@fontsource/nunito/800.css";
+
+@theme {
+  --font-sans: "Nunito", system-ui, sans-serif;
+
+  /* Duolingo-ish palette */
+  --color-brand-green: #58cc02;
+  --color-brand-green-dark: #46a302;
+  --color-brand-blue: #1cb0f6;
+  --color-brand-blue-dark: #0a94d6;
+  --color-brand-gold: #ffc800;
+  --color-brand-gold-dark: #e6b400;
+  --color-brand-red: #ff4b4b;
+  --color-brand-red-dark: #e63e3e;
+  --color-brand-purple: #ce82ff;
+  --color-ink: #3c3c3c;
+  --color-ink-light: #777777;
+  --color-cloud: #f7f7f7;
+  --color-cloud-dark: #e5e5e5;
+}
+
+body {
+  margin: 0;
+  background: var(--color-cloud);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+/*
+ * Universal design-system layer: shared low-level classes so every screen
+ * (deck select, dashboard, study session, chapter browser, stats...) reads
+ * as one consistent app instead of independently-styled pages. Compose these
+ * with the React wrappers in src/components/ (Card, Pill, ProgressBar, ...).
+ */
+@layer components {
+  .app-card {
+    @apply rounded-3xl border-2 border-cloud-dark bg-white p-4 shadow-sm;
+  }
+
+  .app-pill {
+    @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-extrabold tracking-wide;
+  }
+
+  .app-section-title {
+    @apply text-lg font-extrabold text-ink;
+  }
+
+  .app-progress-track {
+    @apply h-2 w-full overflow-hidden rounded-full bg-cloud-dark;
+  }
+
+  .app-progress-fill {
+    @apply h-full rounded-full bg-brand-green transition-[width] duration-500 ease-out;
+  }
+
+  .app-stat-value {
+    @apply text-xl font-extrabold text-ink;
+  }
+
+  .app-stat-label {
+    @apply text-xs text-ink-light;
+  }
+
+  .app-icon-badge {
+    @apply flex shrink-0 items-center justify-center rounded-full;
+  }
+}
