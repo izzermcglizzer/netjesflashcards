@@ -61,4 +61,6 @@ export const router = createBrowserRouter([
   { path: '/deck/:deckId/rank-up', element: withSuspense(<RankUpExam />) },
   { path: '/deck/:deckId/rank-up/result', element: withSuspense(<RankUpResult />) },
   { path: '/deck/:deckId/browse', element: withSuspense(<ChapterBrowser />) },
-])
+], {
+  basename: import.meta.env.BASE_URL,
+})
