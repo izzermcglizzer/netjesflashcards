@@ -10,6 +10,7 @@ import { buildQueue, type QueueItem } from '../../srs/queue'
 import { finalizeSession } from '../../gamification/finalizeSession'
 import { checkAndUnlockAchievements } from '../../gamification/achievementRunner'
 import { StudyModeRenderer, type PracticeMode } from './StudyModeRenderer'
+import { LearnCard } from './modes/LearnCard'
 import { useComboFeedback } from './useComboFeedback'
 import { Mascot, type MascotPose } from '../../components/Mascot'
 import { FlashOverlay } from '../../components/FlashOverlay'
@@ -21,6 +22,11 @@ import type { DeckId } from '../../data/words.types'
 
 const MODES: PracticeMode[] = ['classic', 'multipleChoice', 'typing', 'listening']
 
+// After missing a word this many times in one session, stop re-quizzing it —
+// just show the answer so the user isn't stuck failing the same card on loop.
+const MISSES_BEFORE_REVEAL = 2
+const SKIP_REQUEUE_OFFSET = 4
+
 function todayIso(): string {
   return new Date().toISOString().slice(0, 10)
 }
@@ -28,6 +34,8 @@ function todayIso(): string {
 interface SessionItem {
   item: QueueItem
   mode: PracticeMode
+  missCount: number
+  forceReveal: boolean
 }
 
 /**
@@ -58,7 +66,7 @@ export function QuickRecapSession() {
     getCardStatesForDeck(userId, deckId as DeckId).then((cardStates) => {
       if (cancelled) return
       const due = buildQueue(deckWords, cardStates, { today: todayIso() })
-      setItems(shuffle(due).map((item) => ({ item, mode: shuffle(MODES)[0] })))
+      setItems(shuffle(due).map((item) => ({ item, mode: shuffle(MODES)[0], missCount: 0, forceReveal: false })))
     })
     return () => {
       cancelled = true
@@ -100,7 +108,32 @@ export function QuickRecapSession() {
     )
   }
 
-  const current = items[index]
+  const currentItems = items
+  const current = currentItems[index]
+
+  async function finishOrAdvance(nextItems: SessionItem[], finalStats: { correct: number; incorrect: number }) {
+    if (index + 1 >= nextItems.length) {
+      const freshProfile = await ensureProfile(userId)
+      const result = await finalizeSession(userId, freshProfile, finalStats.correct, finalStats.incorrect)
+      const newAchievements = await checkAndUnlockAchievements(userId, result.profile, {
+        correct: finalStats.correct,
+        incorrect: finalStats.incorrect,
+        isCheckpoint: false,
+      })
+      navigate(`/deck/${deckId}/summary`, {
+        state: {
+          correct: finalStats.correct,
+          incorrect: finalStats.incorrect,
+          xpEarned: result.xpEarned,
+          leveledUp: result.leveledUp,
+          newAchievements,
+        },
+      })
+    } else {
+      setIndex((i) => i + 1)
+      setTimeout(() => setPose('idle'), 700)
+    }
+  }
 
   async function handleGraded(grade: Grade) {
     if (!items) return
@@ -127,33 +160,35 @@ export function QuickRecapSession() {
 
     let nextItems = items
     if (!correct) {
+      const missCount = current.missCount + 1
       nextItems = [...items]
-      const reinsertAt = Math.min(index + 4, nextItems.length)
-      nextItems.splice(reinsertAt, 0, { item: { word: current.item.word, state: nextState }, mode: current.mode })
+      const reinsertAt = Math.min(index + SKIP_REQUEUE_OFFSET, nextItems.length)
+      nextItems.splice(reinsertAt, 0, {
+        item: { word: current.item.word, state: nextState },
+        mode: current.mode,
+        missCount,
+        forceReveal: missCount >= MISSES_BEFORE_REVEAL,
+      })
       setItems(nextItems)
     }
 
-    if (index + 1 >= nextItems.length) {
-      const freshProfile = await ensureProfile(userId)
-      const result = await finalizeSession(userId, freshProfile, finalStats.correct, finalStats.incorrect)
-      const newAchievements = await checkAndUnlockAchievements(userId, result.profile, {
-        correct: finalStats.correct,
-        incorrect: finalStats.incorrect,
-        isCheckpoint: false,
-      })
-      navigate(`/deck/${deckId}/summary`, {
-        state: {
-          correct: finalStats.correct,
-          incorrect: finalStats.incorrect,
-          xpEarned: result.xpEarned,
-          leveledUp: result.leveledUp,
-          newAchievements,
-        },
-      })
-    } else {
-      setIndex((i) => i + 1)
-      setTimeout(() => setPose('idle'), 700)
-    }
+    await finishOrAdvance(nextItems, finalStats)
+  }
+
+  /** Just show the word again — no re-grading, the misses were already recorded. */
+  function handleAcknowledgeReveal() {
+    setPose('idle')
+    void finishOrAdvance(currentItems, stats)
+  }
+
+  /** Skip: no grading, no SRS change — just come back to it a bit later in this session. */
+  function handleSkip() {
+    if (!items) return
+    const nextItems = [...items]
+    const reinsertAt = Math.min(index + SKIP_REQUEUE_OFFSET, nextItems.length)
+    nextItems.splice(reinsertAt, 0, current)
+    setItems(nextItems)
+    void finishOrAdvance(nextItems, stats)
   }
 
   return (
@@ -173,23 +208,39 @@ export function QuickRecapSession() {
         <ProgressBar pct={(index / items.length) * 100} colorClassName="bg-brand-green" />
       </div>
 
-      <div className="mx-auto flex w-full max-w-md items-center gap-3">
-        <Mascot pose={pose} size={64} />
-        <div>
-          <Pill tone="green">⚡ QUICK RECAP</Pill>
-          <p className="mt-1 font-extrabold text-ink">
-            Question {index + 1} of {items.length}
-          </p>
+      <div className="mx-auto flex w-full max-w-md items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <Mascot pose={pose} size={64} />
+          <div>
+            <Pill tone="green">⚡ QUICK RECAP</Pill>
+            <p className="mt-1 font-extrabold text-ink">
+              Question {index + 1} of {items.length}
+            </p>
+          </div>
         </div>
+        {!current.forceReveal && (
+          <button type="button" onClick={handleSkip} className="text-sm font-bold text-ink-light underline">
+            Skip
+          </button>
+        )}
       </div>
 
-      <StudyModeRenderer
-        mode={current.mode}
-        word={current.item.word}
-        deckWords={deckWords}
-        onGraded={handleGraded}
-        onAnswerFeedback={giveImmediateFeedback}
-      />
+      {current.forceReveal ? (
+        <div className="mx-auto flex w-full max-w-md flex-col items-center gap-3">
+          <p className="text-center text-sm font-bold text-ink-light">
+            You've missed this one a couple times — here's a refresher, no pressure.
+          </p>
+          <LearnCard word={current.item.word} onNext={handleAcknowledgeReveal} />
+        </div>
+      ) : (
+        <StudyModeRenderer
+          mode={current.mode}
+          word={current.item.word}
+          deckWords={deckWords}
+          onGraded={handleGraded}
+          onAnswerFeedback={giveImmediateFeedback}
+        />
+      )}
     </div>
   )
 }

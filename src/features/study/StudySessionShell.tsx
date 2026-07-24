@@ -10,6 +10,7 @@ import { scheduleReview, type Grade } from '../../srs/scheduler'
 import { finalizeSession } from '../../gamification/finalizeSession'
 import { checkAndUnlockAchievements } from '../../gamification/achievementRunner'
 import { StudyModeRenderer } from './StudyModeRenderer'
+import { LearnCard } from './modes/LearnCard'
 import { Mascot, type MascotPose } from '../../components/Mascot'
 import { FlashOverlay } from '../../components/FlashOverlay'
 import { ComboBanner } from '../../components/ComboBanner'
@@ -19,8 +20,22 @@ import { getWordsForDeck, decks } from '../../data'
 import type { QueueItem } from '../../srs/queue'
 import type { DeckId } from '../../data/words.types'
 
+// After missing a word this many times in one session, stop re-quizzing it —
+// just show the answer so the user isn't stuck failing the same card on loop.
+const MISSES_BEFORE_REVEAL = 2
+const SKIP_REQUEUE_OFFSET = 4
+
 function todayIso(): string {
   return new Date().toISOString().slice(0, 10)
+}
+
+interface SessionQueueItem extends QueueItem {
+  missCount: number
+  forceReveal: boolean
+}
+
+function toSessionItems(items: QueueItem[]): SessionQueueItem[] {
+  return items.map((item) => ({ ...item, missCount: 0, forceReveal: false }))
 }
 
 export function StudySessionShell() {
@@ -43,14 +58,14 @@ export function StudySessionShell() {
   }, [userId])
 
   const { items, loading, error } = useStudyQueue(userId, deckId as DeckId, { chapterFilter, practiceCount })
-  const [queue, setQueue] = useState<QueueItem[] | null>(null)
+  const [queue, setQueue] = useState<SessionQueueItem[] | null>(null)
   const [index, setIndex] = useState(0)
   const [stats, setStats] = useState({ correct: 0, incorrect: 0 })
   const [pose, setPose] = useState<MascotPose>('idle')
   const { flash, celebration, giveImmediateFeedback, registerAnswer } = useComboFeedback(profile?.sound_enabled ?? true)
 
   useEffect(() => {
-    if (items) setQueue(items)
+    if (items) setQueue(toSessionItems(items))
   }, [items])
 
   useEffect(() => {
@@ -89,38 +104,10 @@ export function StudySessionShell() {
     )
   }
 
-  const current = queue[index]
+  const currentQueue = queue
+  const current = currentQueue[index]
 
-  async function handleGraded(grade: Grade) {
-    const correct = grade >= 2
-    const nextState = scheduleReview(current.state, grade, todayIso())
-
-    await Promise.all([
-      upsertCardState(userId, current.word.id, deckId as DeckId, nextState),
-      appendReviewLog(userId, {
-        wordId: current.word.id,
-        deckId: deckId as DeckId,
-        mode: (mode as StudyMode) ?? 'classic',
-        grade,
-        correct,
-      }),
-    ])
-
-    const finalStats = correct
-      ? { correct: stats.correct + 1, incorrect: stats.incorrect }
-      : { correct: stats.correct, incorrect: stats.incorrect + 1 }
-    setStats(finalStats)
-    setPose(correct ? 'happy' : 'sad')
-    registerAnswer(correct)
-
-    let nextQueue = queue!
-    if (!correct) {
-      nextQueue = [...queue!]
-      const reinsertAt = Math.min(index + 4, nextQueue.length)
-      nextQueue.splice(reinsertAt, 0, { word: current.word, state: nextState })
-      setQueue(nextQueue)
-    }
-
+  async function finishOrAdvance(nextQueue: SessionQueueItem[], finalStats: { correct: number; incorrect: number }) {
     if (index + 1 >= nextQueue.length) {
       const freshProfile = await ensureProfile(userId)
       const result = await finalizeSession(userId, freshProfile, finalStats.correct, finalStats.incorrect)
@@ -144,6 +131,60 @@ export function StudySessionShell() {
     }
   }
 
+  async function handleGraded(grade: Grade) {
+    const correct = grade >= 2
+    const nextState = scheduleReview(current.state, grade, todayIso())
+
+    await Promise.all([
+      upsertCardState(userId, current.word.id, deckId as DeckId, nextState),
+      appendReviewLog(userId, {
+        wordId: current.word.id,
+        deckId: deckId as DeckId,
+        mode: (mode as StudyMode) ?? 'classic',
+        grade,
+        correct,
+      }),
+    ])
+
+    const finalStats = correct
+      ? { correct: stats.correct + 1, incorrect: stats.incorrect }
+      : { correct: stats.correct, incorrect: stats.incorrect + 1 }
+    setStats(finalStats)
+    setPose(correct ? 'happy' : 'sad')
+    registerAnswer(correct)
+
+    let nextQueue = currentQueue
+    if (!correct) {
+      const missCount = current.missCount + 1
+      nextQueue = [...currentQueue]
+      const reinsertAt = Math.min(index + SKIP_REQUEUE_OFFSET, nextQueue.length)
+      nextQueue.splice(reinsertAt, 0, {
+        word: current.word,
+        state: nextState,
+        missCount,
+        forceReveal: missCount >= MISSES_BEFORE_REVEAL,
+      })
+      setQueue(nextQueue)
+    }
+
+    await finishOrAdvance(nextQueue, finalStats)
+  }
+
+  /** Just show the word again — no re-grading, the misses were already recorded. */
+  function handleAcknowledgeReveal() {
+    setPose('idle')
+    void finishOrAdvance(currentQueue, stats)
+  }
+
+  /** Skip: no grading, no SRS change — just come back to it a bit later in this session. */
+  function handleSkip() {
+    const nextQueue = [...currentQueue]
+    const reinsertAt = Math.min(index + SKIP_REQUEUE_OFFSET, nextQueue.length)
+    nextQueue.splice(reinsertAt, 0, current)
+    setQueue(nextQueue)
+    void finishOrAdvance(nextQueue, stats)
+  }
+
   const deck = decks.find((d) => d.id === deckId)
 
   return (
@@ -163,28 +204,44 @@ export function StudySessionShell() {
         <ProgressBar pct={(index / queue.length) * 100} />
       </div>
 
-      <div className="mx-auto flex w-full max-w-md shrink-0 items-center gap-3 px-6 pt-4">
-        <Mascot pose={pose} size={56} />
-        <div>
-          {deck && (
-            <Pill tone="green">
-              LEVEL {deck.order} • {(deck.label.split(': ')[1] ?? deck.label).toUpperCase()}
-            </Pill>
-          )}
-          <p className="mt-1 font-extrabold text-ink">
-            Question {index + 1} of {queue.length}
-          </p>
+      <div className="mx-auto flex w-full max-w-md shrink-0 items-center justify-between gap-3 px-6 pt-4">
+        <div className="flex items-center gap-3">
+          <Mascot pose={pose} size={56} />
+          <div>
+            {deck && (
+              <Pill tone="green">
+                LEVEL {deck.order} • {(deck.label.split(': ')[1] ?? deck.label).toUpperCase()}
+              </Pill>
+            )}
+            <p className="mt-1 font-extrabold text-ink">
+              Question {index + 1} of {queue.length}
+            </p>
+          </div>
         </div>
+        {!current.forceReveal && (
+          <button type="button" onClick={handleSkip} className="text-sm font-bold text-ink-light underline">
+            Skip
+          </button>
+        )}
       </div>
 
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-6 pb-6 pt-4">
-        <StudyModeRenderer
-          mode={mode}
-          word={current.word}
-          deckWords={getWordsForDeck(deckId as DeckId)}
-          onGraded={handleGraded}
-          onAnswerFeedback={giveImmediateFeedback}
-        />
+        {current.forceReveal ? (
+          <div className="mx-auto flex w-full max-w-md flex-col items-center gap-3">
+            <p className="text-center text-sm font-bold text-ink-light">
+              You've missed this one a couple times — here's a refresher, no pressure.
+            </p>
+            <LearnCard word={current.word} onNext={handleAcknowledgeReveal} />
+          </div>
+        ) : (
+          <StudyModeRenderer
+            mode={mode}
+            word={current.word}
+            deckWords={getWordsForDeck(deckId as DeckId)}
+            onGraded={handleGraded}
+            onAnswerFeedback={giveImmediateFeedback}
+          />
+        )}
       </div>
     </div>
   )
