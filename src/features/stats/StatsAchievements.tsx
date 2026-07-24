@@ -4,7 +4,7 @@ import { useAuth } from '../../auth/AuthContext'
 import { getReviewLog, type ReviewLogEntry } from '../../api/reviewLog'
 import { getUnlockedAchievements } from '../../api/achievements'
 import { getCardStatesForDeck } from '../../api/cardState'
-import { computeDeckProgress, type DeckProgress } from '../../srs/progress'
+import { computeDeckProgress, getLearnedProgressPct, type DeckProgress } from '../../srs/progress'
 import { decks, getWordsForDeck } from '../../data'
 import { ACHIEVEMENTS } from '../../gamification/achievements.data'
 import { AchievementBadge } from '../../components/AchievementBadge'
@@ -82,7 +82,7 @@ export function StatsAchievements() {
   const learnedTodayTotal = learnedTodayByDeck.reduce((sum, row) => sum + row.learned, 0)
 
   return (
-    <div className="mx-auto flex min-h-svh w-full max-w-5xl flex-col gap-6 p-4 sm:p-6">
+    <div className="app-page-wide flex min-h-svh flex-col gap-6">
       <Link to="/" className="font-bold text-brand-blue">
         &larr; Decks
       </Link>
@@ -157,7 +157,7 @@ export function StatsAchievements() {
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {decks.map((deck) => {
               const progress = deckProgress[deck.id]
-              const pct = progress.total > 0 ? Math.round((progress.mastered / progress.total) * 100) : 0
+              const pct = getLearnedProgressPct(progress)
               return (
                 <div key={deck.id} className="rounded-2xl bg-cloud px-4 py-4">
                   <div className="flex items-start justify-between gap-3">

@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { getWordsForDeck, decks } from '../../data'
 import { useAuth } from '../../auth/AuthContext'
 import { getCardStatesForDeck } from '../../api/cardState'
-import { computeDeckProgress, type DeckProgress } from '../../srs/progress'
+import { computeDeckProgress, getLearnedProgressPct, type DeckProgress } from '../../srs/progress'
 import { getChapterLockInfo, type ChapterLockInfo } from '../../srs/queue'
 import { Card } from '../../components/Card'
 import { ProgressBar } from '../../components/ProgressBar'
@@ -63,7 +63,7 @@ export function ChapterBrowser() {
   }
 
   return (
-    <div className="mx-auto flex max-w-md flex-col gap-6 p-6">
+    <div className="app-page flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <Link to={`/deck/${deckId}`} className="font-bold text-brand-blue">
           &larr; Level {deck.order} • {deck.label.split(': ')[1] ?? deck.label}
@@ -79,9 +79,7 @@ export function ChapterBrowser() {
       <Card className="flex items-center justify-between">
         <div>
           <p className="text-sm text-ink-light">Your progress</p>
-          <p className="text-xl font-extrabold text-brand-green">
-            {overall.mastered} / {overall.total} mastered
-          </p>
+          <p className="text-xl font-extrabold text-brand-green">{getLearnedProgressPct(overall)}% learned</p>
         </div>
         <button
           type="button"
@@ -101,7 +99,7 @@ export function ChapterBrowser() {
         {rows.map((row, i) => {
           const key = row.chapter ?? 'unsorted'
           const p = progressFor(row.words)
-          const pct = p.total > 0 ? Math.round((p.mastered / p.total) * 100) : 0
+          const pct = getLearnedProgressPct(p)
           const isLast = i === rows.length - 1
           const label = row.chapter ? `Chapter ${row.chapter}` : 'Unsorted'
           const isExpanded = expanded.has(key)
@@ -140,7 +138,7 @@ export function ChapterBrowser() {
                       ) : (
                         <>
                           <p className="text-sm text-ink-light">
-                            {p.mastered} / {p.total} mastered
+                            {p.studied} / {p.total} learned
                             {!row.learned && ' · not fully learned yet'}
                           </p>
                           <div className="mt-2">

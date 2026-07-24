@@ -35,6 +35,38 @@ body {
   min-height: 100svh;
 }
 
+.app-page {
+  width: 100%;
+  max-width: 28rem;
+  margin-inline: auto;
+  padding-top: calc(env(safe-area-inset-top) + 1.5rem);
+  padding-right: calc(env(safe-area-inset-right) + 1rem);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 1.5rem);
+  padding-left: calc(env(safe-area-inset-left) + 1rem);
+}
+
+.app-page-wide {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-top: calc(env(safe-area-inset-top) + 1rem);
+  padding-right: calc(env(safe-area-inset-right) + 1rem);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 1rem);
+  padding-left: calc(env(safe-area-inset-left) + 1rem);
+}
+
+@media (min-width: 640px) {
+  .app-page {
+    padding-right: max(1.5rem, calc(env(safe-area-inset-right) + 1rem));
+    padding-left: max(1.5rem, calc(env(safe-area-inset-left) + 1rem));
+  }
+
+  .app-page-wide {
+    padding-right: max(1.5rem, calc(env(safe-area-inset-right) + 1rem));
+    padding-left: max(1.5rem, calc(env(safe-area-inset-left) + 1rem));
+  }
+}
+
 /*
  * Universal design-system layer: shared low-level classes so every screen
  * (deck select, dashboard, study session, chapter browser, stats...) reads

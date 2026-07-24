@@ -5,7 +5,7 @@ import { useAuth } from '../../auth/AuthContext'
 import { ensureProfile, type Profile } from '../../api/profile'
 import { getCardStatesForDeck } from '../../api/cardState'
 import { getUnlockedAchievements } from '../../api/achievements'
-import { computeDeckProgress, type DeckProgress } from '../../srs/progress'
+import { computeDeckProgress, getLearnedProgressPct, type DeckProgress } from '../../srs/progress'
 import { isDeckLocked } from '../../gamification/deckLock'
 import { getWordsForDeck, decks } from '../../data'
 import { Card } from '../../components/Card'
@@ -127,7 +127,7 @@ export function HomeDashboard() {
   }
 
   return (
-    <div className="mx-auto flex max-w-md flex-col gap-6 p-6">
+    <div className="app-page flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <span className="app-icon-badge h-9 w-9 bg-white text-lg shadow-sm">🔔</span>
         <Link to="/stats" className="app-pill bg-white text-ink shadow-sm">
@@ -173,8 +173,8 @@ export function HomeDashboard() {
 
       {progress && (
         <p className="text-center text-ink-light">
-          {progress.due} due &middot; {progress.studied}/{progress.total} learned &middot; {progress.mastered}/
-          {progress.total} mastered
+          {getLearnedProgressPct(progress)}% learned &middot; {progress.studied}/{progress.total} learned &middot;{' '}
+          {progress.mastered}/{progress.total} mastered
         </p>
       )}
 

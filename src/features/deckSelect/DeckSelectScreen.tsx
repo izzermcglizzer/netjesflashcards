@@ -6,7 +6,7 @@ import { useAuth } from '../../auth/AuthContext'
 import { getCardStatesForDeck } from '../../api/cardState'
 import { ensureProfile, type Profile } from '../../api/profile'
 import { getUnlockedAchievements } from '../../api/achievements'
-import { computeDeckProgress, type DeckProgress } from '../../srs/progress'
+import { computeDeckProgress, getLearnedProgressPct, type DeckProgress } from '../../srs/progress'
 import { isDeckLocked } from '../../gamification/deckLock'
 import { Card } from '../../components/Card'
 import { Pill } from '../../components/Pill'
@@ -86,16 +86,13 @@ export function DeckSelectScreen() {
   const continueDeck =
     unlockedAchievements && isDeckLocked(rawContinueDeck.id, unlockedAchievements) ? decks[0] : rawContinueDeck
   const continueProgress = progress?.[continueDeck.id]
-  const continuePct =
-    continueProgress && continueProgress.total > 0
-      ? Math.round((continueProgress.mastered / continueProgress.total) * 100)
-      : 0
+  const continuePct = continueProgress ? getLearnedProgressPct(continueProgress) : 0
 
   const totalMastered = progress ? Object.values(progress).reduce((sum, p) => sum + p.mastered, 0) : 0
   const firstName = email?.split('@')[0] ?? 'there'
 
   return (
-    <div className="mx-auto flex max-w-md flex-col gap-6 p-6">
+    <div className="app-page flex flex-col gap-6">
       <div className="flex items-start justify-between">
         <div>
           <h1 className="text-2xl font-extrabold text-ink">Hi, {firstName}! 👋</h1>
@@ -136,7 +133,7 @@ export function DeckSelectScreen() {
       <div className="flex flex-col gap-4">
         {decks.map((deck, i) => {
           const p = progress?.[deck.id]
-          const pct = p && p.total > 0 ? Math.round((p.mastered / p.total) * 100) : 0
+          const pct = p ? getLearnedProgressPct(p) : 0
           const difficulty = DECK_DIFFICULTY[deck.id]
           const locked = unlockedAchievements !== null && isDeckLocked(deck.id, unlockedAchievements)
           const prevDeck = decks.find((d) => d.order === deck.order - 1)

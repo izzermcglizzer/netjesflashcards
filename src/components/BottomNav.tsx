@@ -60,7 +60,7 @@ export function BottomNav() {
 
   return (
     <nav className="sticky bottom-0 z-30 border-t-2 border-cloud-dark bg-white/95 backdrop-blur">
-      <div className="mx-auto flex max-w-md items-center justify-around px-2 py-2">
+      <div className="mx-auto flex max-w-md items-center justify-around px-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-2">
         {tabs.map(({ to, label, Icon, end }) => (
           <NavLink
             key={label}

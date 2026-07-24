@@ -29,3 +29,11 @@ export function computeDeckProgress(
 
   return { total: words.length, studied, mastered, due }
 }
+
+export function getLearnedProgressPct(progress: DeckProgress): number {
+  return progress.total > 0 ? Math.round((progress.studied / progress.total) * 100) : 0
+}
+
+export function getMasteredProgressPct(progress: DeckProgress): number {
+  return progress.total > 0 ? Math.round((progress.mastered / progress.total) * 100) : 0
+}
