@@ -7,12 +7,13 @@ export function normalizeForComparison(input: string): string {
     .replace(/\s+/g, ' ')
 }
 
-function simplifyAlternate(alternate: string): string[] {
-  const normalized = normalizeForComparison(alternate)
-  const withoutParens = normalizeForComparison(alternate.replace(/\s*\([^)]*\)/g, ' '))
-  const variants = new Set<string>([normalized, withoutParens])
+function extractAnswerCandidates(answer: string): string[] {
+  const normalized = normalizeForComparison(answer)
+  const beforeParen = normalizeForComparison(answer.split('(')[0] ?? '')
+  const withoutParens = normalizeForComparison(answer.replace(/\s*\([^)]*\)/g, ' '))
+  const variants = new Set<string>([normalized, beforeParen, withoutParens])
 
-  for (const candidate of [...variants]) {
+  for (const candidate of [beforeParen, withoutParens]) {
     candidate
       .split('/')
       .map((part) => part.trim())
@@ -41,16 +42,29 @@ function levenshtein(a: string, b: string): number {
   return dp[a.length][b.length]
 }
 
-/** Accepts an exact match after normalization, or a 1-character typo on words of 4+ letters. */
-export function matchesAlternate(input: string, alternate: string): boolean {
+export type MatchResult = 'exact' | 'typo' | 'none'
+
+export function matchAlternate(input: string, alternate: string): MatchResult {
   const a = normalizeForComparison(input)
-  for (const candidate of simplifyAlternate(alternate)) {
-    if (a === candidate) return true
-    if (candidate.length >= 4 && levenshtein(a, candidate) <= 1) return true
+  for (const candidate of extractAnswerCandidates(alternate)) {
+    if (a === candidate) return 'exact'
   }
-  return false
+  for (const candidate of extractAnswerCandidates(alternate)) {
+    if (candidate.length >= 4 && levenshtein(a, candidate) <= 1) return 'typo'
+  }
+  return 'none'
 }
 
 export function matchesAnyAlternate(input: string, alternates: string[]): boolean {
-  return alternates.some((alt) => matchesAlternate(input, alt))
+  return alternates.some((alt) => matchAlternate(input, alt) !== 'none')
+}
+
+export function getBestMatch(input: string, alternates: string[]): MatchResult {
+  let sawTypo = false
+  for (const alternate of alternates) {
+    const result = matchAlternate(input, alternate)
+    if (result === 'exact') return 'exact'
+    if (result === 'typo') sawTypo = true
+  }
+  return sawTypo ? 'typo' : 'none'
 }

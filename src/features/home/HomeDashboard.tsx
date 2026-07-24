@@ -208,65 +208,66 @@ export function HomeDashboard() {
         <p className="mb-3 -mt-2 text-xs text-ink-light">Only words you've already learned show up here.</p>
         <div className="flex flex-col gap-3">
           {MODES.map((m) => (
-            <ActionRow
-              key={m.id}
-              icon={m.icon}
-              label={m.label}
-              subtitle={selectedMode === m.id ? `Selected • ${m.subtitle}` : m.subtitle}
-              pose={m.pose}
-              onClick={() => handleSelectMode(m.id)}
-              disabled={(progress?.studied ?? 0) === 0}
-            />
-          ))}
-
-          {progress && progress.studied > 0 && selectedMode && (
-            <Card className="space-y-4 bg-brand-purple/8">
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="font-extrabold text-ink">Choose how many learned cards to practice</p>
-                  <p className="text-sm text-ink-light">
-                    You have {progress.studied} learned cards in this level. Practice any amount up to all of them.
-                  </p>
-                </div>
-                <Pill tone="purple">{practiceCount} cards</Pill>
-              </div>
-
-              <input
-                type="range"
-                min={1}
-                max={progress.studied}
-                step={1}
-                value={practiceCount}
-                onChange={(e) => setPracticeCount(Number(e.target.value))}
-                className="w-full accent-[var(--color-brand-purple)]"
+            <div key={m.id} className="flex flex-col gap-3">
+              <ActionRow
+                icon={m.icon}
+                label={m.label}
+                subtitle={selectedMode === m.id ? `Selected • ${m.subtitle}` : m.subtitle}
+                pose={m.pose}
+                onClick={() => handleSelectMode(m.id)}
+                disabled={(progress?.studied ?? 0) === 0}
               />
 
-              <div className="grid grid-cols-4 gap-2">
-                {[5, 10, 20, progress.studied].map((count, i) => {
-                  const value = Math.min(count, progress.studied)
-                  const label = i === 3 ? 'All' : String(value)
-                  return (
-                    <button
-                      key={`${label}-${value}`}
-                      type="button"
-                      onClick={() => setPracticeCount(value)}
-                      className={`rounded-xl border-2 px-3 py-2 text-sm font-extrabold ${
-                        practiceCount === value
-                          ? 'border-brand-purple bg-brand-purple text-white'
-                          : 'border-cloud-dark bg-white text-ink'
-                      }`}
-                    >
-                      {label}
-                    </button>
-                  )
-                })}
-              </div>
+              {progress && progress.studied > 0 && selectedMode === m.id && (
+                <Card className="space-y-4 bg-brand-purple/8">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="font-extrabold text-ink">Choose how many learned cards to practice</p>
+                      <p className="text-sm text-ink-light">
+                        You have {progress.studied} learned cards in this level. Practice any amount up to all of them.
+                      </p>
+                    </div>
+                    <Pill tone="purple">{practiceCount} cards</Pill>
+                  </div>
 
-              <ChunkyButton variant="purple" fullWidth onClick={startSpecificPractice}>
-                Start {MODES.find((mode) => mode.id === selectedMode)?.label}
-              </ChunkyButton>
-            </Card>
-          )}
+                  <input
+                    type="range"
+                    min={1}
+                    max={progress.studied}
+                    step={1}
+                    value={practiceCount}
+                    onChange={(e) => setPracticeCount(Number(e.target.value))}
+                    className="w-full accent-[var(--color-brand-purple)]"
+                  />
+
+                  <div className="grid grid-cols-4 gap-2">
+                    {[5, 10, 20, progress.studied].map((count, i) => {
+                      const value = Math.min(count, progress.studied)
+                      const label = i === 3 ? 'All' : String(value)
+                      return (
+                        <button
+                          key={`${label}-${value}`}
+                          type="button"
+                          onClick={() => setPracticeCount(value)}
+                          className={`rounded-xl border-2 px-3 py-2 text-sm font-extrabold ${
+                            practiceCount === value
+                              ? 'border-brand-purple bg-brand-purple text-white'
+                              : 'border-cloud-dark bg-white text-ink'
+                          }`}
+                        >
+                          {label}
+                        </button>
+                      )
+                    })}
+                  </div>
+
+                  <ChunkyButton variant="purple" fullWidth onClick={startSpecificPractice}>
+                    Start {m.label}
+                  </ChunkyButton>
+                </Card>
+              )}
+            </div>
+          ))}
 
           {progress &&
             (progress.total > 0 && progress.studied === progress.total ? (

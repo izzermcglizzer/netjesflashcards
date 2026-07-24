@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { matchesAnyAlternate } from './text'
+import { getBestMatch, matchesAnyAlternate } from './text'
 
 describe('matchesAnyAlternate', () => {
   it('accepts any of multiple alternates', () => {
@@ -19,6 +19,19 @@ describe('matchesAnyAlternate', () => {
 
   it('accepts the main word without parenthetical notes', () => {
     expect(matchesAnyAlternate('vies', ['vies (nasty/dirty)'])).toBe(true)
+  })
+
+  it('accepts answers when malformed alternates still have the right leading term', () => {
+    expect(matchesAnyAlternate('rustig', ['rustig (quiet', 'calm)'])).toBe(true)
+  })
+
+  it('returns typo when the answer is close enough', () => {
+    expect(getBestMatch('ruztig', ['rustig (quiet / calm)'])).toBe('typo')
+  })
+
+  it('rejects parenthetical translation words as answers', () => {
+    expect(matchesAnyAlternate('calm', ['rustig (quiet / calm)'])).toBe(false)
+    expect(matchesAnyAlternate('quiet', ['rustig (quiet / calm)'])).toBe(false)
   })
 
   it('rejects unrelated answers', () => {

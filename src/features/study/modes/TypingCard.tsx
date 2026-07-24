@@ -5,7 +5,7 @@ import type { Grade } from '../../../srs/scheduler'
 import { ChunkyButton } from '../../../components/ChunkyButton'
 import { Mascot } from '../../../components/Mascot'
 import { Card } from '../../../components/Card'
-import { matchesAnyAlternate } from '../../../utils/text'
+import { getBestMatch } from '../../../utils/text'
 import { useScrollIntoView } from '../../../utils/scroll'
 
 export function TypingCard({
@@ -18,15 +18,15 @@ export function TypingCard({
   onAnswerFeedback?: (correct: boolean) => void
 }) {
   const [value, setValue] = useState('')
-  const [result, setResult] = useState<'correct' | 'incorrect' | null>(null)
+  const [result, setResult] = useState<'correct' | 'typo' | 'incorrect' | null>(null)
   const { ref: continueRef, scrollIntoView } = useScrollIntoView<HTMLDivElement>()
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
     if (result || value.trim().length === 0) return
-    const correct = matchesAnyAlternate(value, word.dutchAlternates)
-    setResult(correct ? 'correct' : 'incorrect')
-    onAnswerFeedback?.(correct)
+    const match = getBestMatch(value, [word.dutch, ...word.dutchAlternates])
+    setResult(match === 'none' ? 'incorrect' : match === 'exact' ? 'correct' : 'typo')
+    onAnswerFeedback?.(match !== 'none')
   }
 
   useEffect(() => {
@@ -34,12 +34,13 @@ export function TypingCard({
   }, [result, scrollIntoView])
 
   function handleContinue() {
-    onGraded(result === 'correct' ? 2 : 0)
+    onGraded(result === 'incorrect' ? 0 : 2)
     setValue('')
     setResult(null)
   }
 
   const isCorrect = result === 'correct'
+  const isTypo = result === 'typo'
 
   return (
     <div className="mx-auto flex w-full max-w-md flex-col items-center gap-4">
@@ -58,6 +59,8 @@ export function TypingCard({
           className={`rounded-xl border-2 px-4 py-3 text-center text-lg outline-none ${
             result === 'correct'
               ? 'border-brand-green'
+              : result === 'typo'
+                ? 'border-brand-gold bg-brand-gold/10'
               : result === 'incorrect'
                 ? 'border-brand-red'
                 : 'border-cloud-dark focus:border-brand-blue'
@@ -79,15 +82,25 @@ export function TypingCard({
           transition={{ type: 'spring', stiffness: 300, damping: 26 }}
           className="w-full"
         >
-          <Card className={isCorrect ? 'bg-brand-green/10' : 'bg-brand-red/10'}>
+          <Card className={isCorrect ? 'bg-brand-green/10' : isTypo ? 'bg-brand-gold/15' : 'bg-brand-red/10'}>
             <div className="flex items-center gap-3">
-              <Mascot pose={isCorrect ? 'happy' : 'sad'} size={56} />
+              <Mascot pose={isCorrect || isTypo ? 'happy' : 'sad'} size={56} />
               <div>
-                <p className={`font-extrabold ${isCorrect ? 'text-brand-green-dark' : 'text-brand-red-dark'}`}>
-                  {isCorrect ? 'Goed zo! 🎉' : 'Fout'}
+                <p
+                  className={`font-extrabold ${
+                    isCorrect
+                      ? 'text-brand-green-dark'
+                      : isTypo
+                        ? 'text-brand-gold-dark'
+                        : 'text-brand-red-dark'
+                  }`}
+                >
+                  {isCorrect ? 'Goed zo! 🎉' : isTypo ? 'Bijna perfect ✨' : 'Fout'}
                 </p>
                 <p className="text-sm text-ink-light">
-                  "{word.dutch}" means "{word.english}".
+                  {isTypo
+                    ? `Accepted with a typo — the answer is "${word.dutch}".`
+                    : `"${word.dutch}" means "${word.english}".`}
                 </p>
               </div>
             </div>
