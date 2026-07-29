@@ -7,6 +7,7 @@ import { Mascot } from '../../../components/Mascot'
 import { Card } from '../../../components/Card'
 import { shuffle, pickDistractors } from '../../../utils/array'
 import { useScrollIntoView } from '../../../utils/scroll'
+import { ExampleSentencePanel } from '../ExampleSentencePanel'
 
 export function MultipleChoiceCard({
   word,
@@ -120,6 +121,7 @@ export function MultipleChoiceCard({
               </div>
             </div>
           </Card>
+          <ExampleSentencePanel word={word} />
           <ChunkyButton variant="primary" fullWidth className="mt-3" onClick={handleContinue}>
             Volgende →
           </ChunkyButton>

@@ -23,6 +23,7 @@ create table if not exists card_state (
   repetitions int not null default 0,
   due_date date not null,
   last_reviewed_at timestamptz,
+  learned_at timestamptz,
   primary key (user_id, word_id)
 );
 
@@ -63,3 +64,20 @@ create policy "achievement: owner only" on achievement
 
 create index if not exists card_state_due_idx on card_state (user_id, deck_id, due_date);
 create index if not exists review_log_user_idx on review_log (user_id, reviewed_at desc);
+
+-- Once learned_at is set, preserve it even if a future code change
+-- accidentally sends a different value on a later update.
+create or replace function card_state_preserve_learned_at()
+returns trigger as $$
+begin
+  if TG_OP = 'UPDATE' and OLD.learned_at is not null then
+    NEW.learned_at := OLD.learned_at;
+  end if;
+  return NEW;
+end;
+$$ language plpgsql;
+
+drop trigger if exists card_state_preserve_learned_at_trigger on card_state;
+create trigger card_state_preserve_learned_at_trigger
+before update on card_state
+for each row execute function card_state_preserve_learned_at();

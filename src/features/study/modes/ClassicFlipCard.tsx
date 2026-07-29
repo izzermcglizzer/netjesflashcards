@@ -4,7 +4,7 @@ import type { Word } from '../../../data/words.types'
 import type { Grade } from '../../../srs/scheduler'
 import { ChunkyButton } from '../../../components/ChunkyButton'
 import { Card } from '../../../components/Card'
-import { splitLines } from '../../../utils/html'
+import { ExampleSentencePanel } from '../ExampleSentencePanel'
 
 export function ClassicFlipCard({
   word,
@@ -69,11 +69,7 @@ export function ClassicFlipCard({
                     </button>
                   )}
                 </div>
-                {splitLines(word.notesNl).map((line, i) => (
-                  <p key={i} className="text-sm text-ink-light">
-                    {line}
-                  </p>
-                ))}
+                <ExampleSentencePanel word={word} />
               </motion.div>
             ) : (
               <ChunkyButton variant="neutral" onClick={() => setRevealed(true)}>

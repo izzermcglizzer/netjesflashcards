@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import type { Word } from '../../../data/words.types'
 import { ChunkyButton } from '../../../components/ChunkyButton'
 import { Card } from '../../../components/Card'
-import { splitLines } from '../../../utils/html'
+import { ExampleSentencePanel } from '../ExampleSentencePanel'
 
 /**
  * The Anki-style "add the card" step: no grading, just introduce the word and
@@ -69,11 +69,7 @@ export function LearnCard({ word, onNext }: { word: Word; onNext: () => void }) 
                     </button>
                   )}
                 </div>
-                {splitLines(word.notesNl).map((line, i) => (
-                  <p key={i} className="text-sm text-ink-light">
-                    {line}
-                  </p>
-                ))}
+                <ExampleSentencePanel word={word} />
               </motion.div>
             )}
           </Card>

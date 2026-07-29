@@ -57,18 +57,42 @@ export function buildChapterPracticeQueue(words: Word[], cardStates: Map<string,
   return learned.sort((a, b) => byChapterThenId(a.word, b.word))
 }
 
-export function buildCustomPracticeQueue(
+/**
+ * SRS-due words only (like buildQueue), optionally capped to `count` — used
+ * by Custom Practice's "all due words" source. If there are more due words
+ * than requested, a random subset is sampled rather than always taking the
+ * same chapter-ordered prefix.
+ */
+export function buildDueQueue(
+  words: Word[],
+  cardStates: Map<string, CardState>,
+  opts: { today: string; count?: number | null },
+): QueueItem[] {
+  const due = buildQueue(words, cardStates, { today: opts.today })
+  if (!opts.count || opts.count >= due.length) return due
+  return shuffleInPlace([...due]).slice(0, opts.count)
+}
+
+/**
+ * Top `count` learned words by recency of first-learn, most-recent first —
+ * used by Custom Practice's "last N words I learned" source. Words learned
+ * before the learnedAt column existed have no value and are excluded rather
+ * than guessed at (last_reviewed_at is not a valid proxy: it's overwritten on
+ * every review, not just the first).
+ */
+export function buildRecentlyLearnedQueue(
   words: Word[],
   cardStates: Map<string, CardState>,
   count: number,
 ): QueueItem[] {
-  const learnedWords = sampleAcrossChapters(words, cardStates, count)
-  return learnedWords
-    .map((word) => {
-      const state = cardStates.get(word.id)
-      return state ? { word, state } : null
-    })
-    .filter((item): item is QueueItem => item !== null)
+  const learned: QueueItem[] = []
+  for (const word of words) {
+    const state = cardStates.get(word.id)
+    if (state?.learnedAt) learned.push({ word, state })
+  }
+  return learned
+    .sort((a, b) => b.state.learnedAt!.localeCompare(a.state.learnedAt!))
+    .slice(0, count)
 }
 
 /** Words in the given set that haven't been learned yet (no SRS state at all). */

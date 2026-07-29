@@ -1,42 +1,18 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useAuth } from '../../auth/AuthContext'
 import { useStudyQueue } from './useStudyQueue'
-import { useComboFeedback } from './useComboFeedback'
+import { useGradedSession, toSessionItems } from './useGradedSession'
 import { ensureProfile, type Profile } from '../../api/profile'
-import { upsertCardState } from '../../api/cardState'
-import { appendReviewLog, type StudyMode } from '../../api/reviewLog'
-import { scheduleReview, type Grade } from '../../srs/scheduler'
-import { finalizeSession } from '../../gamification/finalizeSession'
-import { checkAndUnlockAchievements } from '../../gamification/achievementRunner'
-import { StudyModeRenderer } from './StudyModeRenderer'
+import { StudyModeRenderer, type PracticeMode } from './StudyModeRenderer'
 import { LearnCard } from './modes/LearnCard'
-import { Mascot, type MascotPose } from '../../components/Mascot'
+import { Mascot } from '../../components/Mascot'
 import { FlashOverlay } from '../../components/FlashOverlay'
 import { ComboBanner } from '../../components/ComboBanner'
 import { ProgressBar } from '../../components/ProgressBar'
 import { Pill } from '../../components/Pill'
 import { getWordsForDeck, decks } from '../../data'
-import type { QueueItem } from '../../srs/queue'
 import type { DeckId } from '../../data/words.types'
-
-// After missing a word this many times in one session, stop re-quizzing it —
-// just show the answer so the user isn't stuck failing the same card on loop.
-const MISSES_BEFORE_REVEAL = 2
-const SKIP_REQUEUE_OFFSET = 4
-
-function todayIso(): string {
-  return new Date().toISOString().slice(0, 10)
-}
-
-interface SessionQueueItem extends QueueItem {
-  missCount: number
-  forceReveal: boolean
-}
-
-function toSessionItems(items: QueueItem[]): SessionQueueItem[] {
-  return items.map((item) => ({ ...item, missCount: 0, forceReveal: false }))
-}
 
 export function StudySessionShell() {
   const { deckId, mode } = useParams<{ deckId: string; mode: string }>()
@@ -46,8 +22,6 @@ export function StudySessionShell() {
       ? null
       : searchParams.get('chapter')
     : undefined
-  const practiceCountParam = searchParams.get('count')
-  const practiceCount = practiceCountParam ? Number.parseInt(practiceCountParam, 10) : null
   const navigate = useNavigate()
   const { userId } = useAuth()
   const [profile, setProfile] = useState<Profile | null>(null)
@@ -57,16 +31,23 @@ export function StudySessionShell() {
     ensureProfile(userId).then(setProfile)
   }, [userId])
 
-  const { items, loading, error } = useStudyQueue(userId, deckId as DeckId, { chapterFilter, practiceCount })
-  const [queue, setQueue] = useState<SessionQueueItem[] | null>(null)
-  const [index, setIndex] = useState(0)
-  const [stats, setStats] = useState({ correct: 0, incorrect: 0 })
-  const [pose, setPose] = useState<MascotPose>('idle')
-  const { flash, celebration, giveImmediateFeedback, registerAnswer } = useComboFeedback(profile?.sound_enabled ?? true)
-
-  useEffect(() => {
-    if (items) setQueue(toSessionItems(items))
-  }, [items])
+  const { items, loading, error } = useStudyQueue(userId, deckId as DeckId, { chapterFilter })
+  const sessionItems = useMemo(
+    () => (items ? toSessionItems(items, () => (mode as PracticeMode) ?? 'classic') : null),
+    [items, mode],
+  )
+  const {
+    current,
+    index,
+    queue,
+    flash,
+    celebration,
+    pose,
+    giveImmediateFeedback,
+    handleGraded,
+    handleSkip,
+    handleAcknowledgeReveal,
+  } = useGradedSession(sessionItems, { userId, deckId: deckId as DeckId, soundEnabled: profile?.sound_enabled ?? true })
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
@@ -88,7 +69,7 @@ export function StudySessionShell() {
     )
   }
 
-  if (queue.length === 0) {
+  if (queue.length === 0 || !current) {
     return (
       <div className="flex min-h-svh flex-col items-center justify-center gap-4 p-6 text-center">
         <Mascot pose="happy" />
@@ -102,87 +83,6 @@ export function StudySessionShell() {
         </button>
       </div>
     )
-  }
-
-  const currentQueue = queue
-  const current = currentQueue[index]
-
-  async function finishOrAdvance(nextQueue: SessionQueueItem[], finalStats: { correct: number; incorrect: number }) {
-    if (index + 1 >= nextQueue.length) {
-      const freshProfile = await ensureProfile(userId)
-      const result = await finalizeSession(userId, freshProfile, finalStats.correct, finalStats.incorrect)
-      const newAchievements = await checkAndUnlockAchievements(userId, result.profile, {
-        correct: finalStats.correct,
-        incorrect: finalStats.incorrect,
-        isCheckpoint: false,
-      })
-      navigate(`/deck/${deckId}/summary`, {
-        state: {
-          correct: finalStats.correct,
-          incorrect: finalStats.incorrect,
-          xpEarned: result.xpEarned,
-          leveledUp: result.leveledUp,
-          newAchievements,
-        },
-      })
-    } else {
-      setIndex((i) => i + 1)
-      setTimeout(() => setPose('idle'), 700)
-    }
-  }
-
-  async function handleGraded(grade: Grade) {
-    const correct = grade >= 2
-    const nextState = scheduleReview(current.state, grade, todayIso())
-
-    await Promise.all([
-      upsertCardState(userId, current.word.id, deckId as DeckId, nextState),
-      appendReviewLog(userId, {
-        wordId: current.word.id,
-        deckId: deckId as DeckId,
-        mode: (mode as StudyMode) ?? 'classic',
-        grade,
-        correct,
-      }),
-    ])
-
-    const finalStats = correct
-      ? { correct: stats.correct + 1, incorrect: stats.incorrect }
-      : { correct: stats.correct, incorrect: stats.incorrect + 1 }
-    setStats(finalStats)
-    setPose(correct ? 'happy' : 'sad')
-    registerAnswer(correct)
-
-    let nextQueue = currentQueue
-    if (!correct) {
-      const missCount = current.missCount + 1
-      nextQueue = [...currentQueue]
-      const reinsertAt = Math.min(index + SKIP_REQUEUE_OFFSET, nextQueue.length)
-      nextQueue.splice(reinsertAt, 0, {
-        word: current.word,
-        state: nextState,
-        missCount,
-        forceReveal: missCount >= MISSES_BEFORE_REVEAL,
-      })
-      setQueue(nextQueue)
-    }
-
-    await finishOrAdvance(nextQueue, finalStats)
-  }
-
-  /** Just show the word again — no re-grading, the misses were already recorded. */
-  function handleAcknowledgeReveal() {
-    setPose('idle')
-    void finishOrAdvance(currentQueue, stats)
-  }
-
-  /** Skip: no grading, no SRS change — just come back to it a bit later in this session. */
-  function handleSkip() {
-    const nextQueue = [...currentQueue]
-    const reinsertAt = Math.min(index + SKIP_REQUEUE_OFFSET, nextQueue.length)
-    nextQueue.splice(reinsertAt, 0, current)
-    setQueue(nextQueue)
-    void finishOrAdvance(nextQueue, stats)
   }
 
   const deck = decks.find((d) => d.id === deckId)
@@ -235,7 +135,7 @@ export function StudySessionShell() {
           </div>
         ) : (
           <StudyModeRenderer
-            mode={mode}
+            mode={current.mode}
             word={current.word}
             deckWords={getWordsForDeck(deckId as DeckId)}
             onGraded={handleGraded}

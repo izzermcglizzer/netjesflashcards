@@ -7,6 +7,7 @@ import { Mascot } from '../../../components/Mascot'
 import { Card } from '../../../components/Card'
 import { getBestMatch } from '../../../utils/text'
 import { useScrollIntoView } from '../../../utils/scroll'
+import { ExampleSentencePanel } from '../ExampleSentencePanel'
 
 export function TypingCard({
   word,
@@ -105,6 +106,7 @@ export function TypingCard({
               </div>
             </div>
           </Card>
+          <ExampleSentencePanel word={word} />
           <ChunkyButton variant="primary" fullWidth className="mt-3" onClick={handleContinue}>
             Volgende →
           </ChunkyButton>

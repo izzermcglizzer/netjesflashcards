@@ -5,13 +5,14 @@ export interface CardState {
   intervalDays: number
   repetitions: number
   dueDate: string // ISO date, yyyy-mm-dd
+  learnedAt?: string // ISO timestamp, set once when the word is first learned and never changed after
 }
 
 const MIN_EASE = 1.3
 const EASE_DELTA: Record<Grade, number> = { 0: -0.2, 1: -0.15, 2: 0, 3: 0.15 }
 
 export function newCardState(today: string): CardState {
-  return { easeFactor: 2.5, intervalDays: 0, repetitions: 0, dueDate: today }
+  return { easeFactor: 2.5, intervalDays: 0, repetitions: 0, dueDate: today, learnedAt: new Date().toISOString() }
 }
 
 function addDays(isoDate: string, days: number): string {
@@ -27,6 +28,7 @@ export function scheduleReview(state: CardState, grade: Grade, today: string): C
       intervalDays: 1,
       repetitions: 0,
       dueDate: addDays(today, 1),
+      learnedAt: state.learnedAt,
     }
   }
 
@@ -35,5 +37,5 @@ export function scheduleReview(state: CardState, grade: Grade, today: string): C
     repetitions === 1 ? 1 : repetitions === 2 ? 6 : Math.round(state.intervalDays * state.easeFactor)
   const easeFactor = Math.max(MIN_EASE, state.easeFactor + EASE_DELTA[grade])
 
-  return { easeFactor, intervalDays, repetitions, dueDate: addDays(today, intervalDays) }
+  return { easeFactor, intervalDays, repetitions, dueDate: addDays(today, intervalDays), learnedAt: state.learnedAt }
 }

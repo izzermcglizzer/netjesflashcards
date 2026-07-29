@@ -26,6 +26,12 @@ const StatsAchievements = lazy(() =>
 const ChapterBrowser = lazy(() =>
   import('./features/browse/ChapterBrowser').then((m) => ({ default: m.ChapterBrowser })),
 )
+const CustomPracticeSetup = lazy(() =>
+  import('./features/customPractice/CustomPracticeSetup').then((m) => ({ default: m.CustomPracticeSetup })),
+)
+const CustomPracticeSession = lazy(() =>
+  import('./features/customPractice/CustomPracticeSession').then((m) => ({ default: m.CustomPracticeSession })),
+)
 const SettingsPage = lazy(() =>
   import('./features/settings/SettingsPage').then((m) => ({ default: m.SettingsPage })),
 )
@@ -61,6 +67,8 @@ export const router = createBrowserRouter([
   { path: '/deck/:deckId/rank-up', element: withSuspense(<RankUpExam />) },
   { path: '/deck/:deckId/rank-up/result', element: withSuspense(<RankUpResult />) },
   { path: '/deck/:deckId/browse', element: withSuspense(<ChapterBrowser />) },
+  { path: '/deck/:deckId/custom-practice', element: withSuspense(<CustomPracticeSetup />) },
+  { path: '/deck/:deckId/custom-practice/session', element: withSuspense(<CustomPracticeSession />) },
 ], {
   basename: import.meta.env.BASE_URL,
 })

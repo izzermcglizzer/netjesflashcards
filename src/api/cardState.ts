@@ -10,6 +10,7 @@ interface CardStateRow {
   repetitions: number
   due_date: string
   last_reviewed_at: string | null
+  learned_at: string | null
 }
 
 function rowToState(row: CardStateRow): CardState {
@@ -18,13 +19,14 @@ function rowToState(row: CardStateRow): CardState {
     intervalDays: row.interval_days,
     repetitions: row.repetitions,
     dueDate: row.due_date,
+    learnedAt: row.learned_at ?? undefined,
   }
 }
 
 export async function getCardStatesForDeck(userId: string, deckId: DeckId): Promise<Map<string, CardState>> {
   const { data, error } = await supabase
     .from('card_state')
-    .select('word_id, deck_id, ease_factor, interval_days, repetitions, due_date, last_reviewed_at')
+    .select('word_id, deck_id, ease_factor, interval_days, repetitions, due_date, last_reviewed_at, learned_at')
     .eq('user_id', userId)
     .eq('deck_id', deckId)
   if (error) throw error
@@ -47,6 +49,7 @@ export async function upsertCardState(
     repetitions: state.repetitions,
     due_date: state.dueDate,
     last_reviewed_at: new Date().toISOString(),
+    learned_at: state.learnedAt ?? null,
   })
   if (error) throw error
 }

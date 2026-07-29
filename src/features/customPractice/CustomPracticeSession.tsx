@@ -1,35 +1,40 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useAuth } from '../../auth/AuthContext'
 import { getWordsForDeck } from '../../data'
 import { getCardStatesForDeck } from '../../api/cardState'
 import { ensureProfile, type Profile } from '../../api/profile'
-import { buildQueue, type QueueItem } from '../../srs/queue'
-import { StudyModeRenderer, type PracticeMode } from './StudyModeRenderer'
-import { LearnCard } from './modes/LearnCard'
-import { useGradedSession, toSessionItems, type SessionItem } from './useGradedSession'
+import { buildDueQueue, buildRecentlyLearnedQueue, type QueueItem } from '../../srs/queue'
+import { StudyModeRenderer, type PracticeMode } from '../study/StudyModeRenderer'
+import { LearnCard } from '../study/modes/LearnCard'
+import { useGradedSession, toSessionItems, type SessionItem } from '../study/useGradedSession'
 import { Mascot } from '../../components/Mascot'
 import { FlashOverlay } from '../../components/FlashOverlay'
 import { ComboBanner } from '../../components/ComboBanner'
 import { ProgressBar } from '../../components/ProgressBar'
 import { Pill } from '../../components/Pill'
 import { shuffle } from '../../utils/array'
+import type { PracticeSource } from './customPractice.types'
 import type { DeckId } from '../../data/words.types'
 
-const MODES: PracticeMode[] = ['classic', 'multipleChoice', 'typing', 'listening']
+const VALID_MODES = new Set<PracticeMode>(['classic', 'multipleChoice', 'typing', 'listening'])
 
 function todayIso(): string {
   return new Date().toISOString().slice(0, 10)
 }
 
-/**
- * Quick Recap: a mixed-format review of every already-learned word that's due
- * across the WHOLE deck (not scoped to one chapter) — flip cards, multiple
- * choice, typing, and listening all shuffled together. Never teaches anything
- * new; that's exclusively Learn New Words' job.
- */
-export function QuickRecapSession() {
+function parseModes(raw: string | null): PracticeMode[] {
+  const modes = (raw ?? '').split(',').filter((m): m is PracticeMode => VALID_MODES.has(m as PracticeMode))
+  return modes.length > 0 ? modes : ['classic']
+}
+
+export function CustomPracticeSession() {
   const { deckId } = useParams<{ deckId: string }>()
+  const [searchParams] = useSearchParams()
+  const modes = useMemo(() => parseModes(searchParams.get('modes')), [searchParams])
+  const source: PracticeSource = searchParams.get('source') === 'recent' ? 'recent' : 'due'
+  const count = Number.parseInt(searchParams.get('count') ?? '', 10) || 10
+
   const navigate = useNavigate()
   const { userId } = useAuth()
   const [profile, setProfile] = useState<Profile | null>(null)
@@ -45,13 +50,17 @@ export function QuickRecapSession() {
     let cancelled = false
     getCardStatesForDeck(userId, deckId as DeckId).then((cardStates) => {
       if (cancelled) return
-      const due: QueueItem[] = buildQueue(deckWords, cardStates, { today: todayIso() })
-      setInitialItems(toSessionItems(shuffle(due), () => shuffle(MODES)[0]))
+      const due: QueueItem[] =
+        source === 'recent'
+          ? buildRecentlyLearnedQueue(deckWords, cardStates, count)
+          : buildDueQueue(deckWords, cardStates, { today: todayIso(), count })
+      setInitialItems(toSessionItems(shuffle(due), () => shuffle(modes)[0]))
     })
     return () => {
       cancelled = true
     }
-  }, [userId, deckId, deckWords])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId, deckId, deckWords, source, count])
 
   const {
     current,
@@ -82,7 +91,16 @@ export function QuickRecapSession() {
     return (
       <div className="flex min-h-svh flex-col items-center justify-center gap-4 p-6 text-center">
         <Mascot pose="happy" />
-        <p className="text-xl font-bold">All caught up! Nothing due to recap right now.</p>
+        {source === 'recent' ? (
+          <>
+            <p className="text-xl font-bold">No recently-learned words yet.</p>
+            <p className="text-ink-light">
+              This tracks words learned from today onward. Go learn some new words, then come back to drill them!
+            </p>
+          </>
+        ) : (
+          <p className="text-xl font-bold">All caught up! Nothing due to practice right now.</p>
+        )}
         <button
           type="button"
           onClick={() => navigate(`/deck/${deckId}/learn`)}
@@ -115,14 +133,14 @@ export function QuickRecapSession() {
         >
           ×
         </button>
-        <ProgressBar pct={(index / queue.length) * 100} colorClassName="bg-brand-green" />
+        <ProgressBar pct={(index / queue.length) * 100} colorClassName="bg-brand-purple" />
       </div>
 
       <div className="mx-auto flex w-full max-w-md items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <Mascot pose={pose} size={64} />
           <div>
-            <Pill tone="green">⚡ QUICK RECAP</Pill>
+            <Pill tone="purple">🎯 CUSTOM PRACTICE</Pill>
             <p className="mt-1 font-extrabold text-ink">
               Question {index + 1} of {queue.length}
             </p>

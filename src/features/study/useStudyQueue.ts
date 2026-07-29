@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { getWordsForDeck } from '../../data'
 import type { DeckId } from '../../data/words.types'
 import { getCardStatesForDeck } from '../../api/cardState'
-import { buildQueue, buildChapterPracticeQueue, buildCustomPracticeQueue, type QueueItem } from '../../srs/queue'
+import { buildQueue, buildChapterPracticeQueue, type QueueItem } from '../../srs/queue'
 
 function todayIso(): string {
   return new Date().toISOString().slice(0, 10)
@@ -11,17 +11,15 @@ function todayIso(): string {
 /**
  * Regular practice queue (Flip Cards, Multiple Choice, Typing, Listening):
  * only already-learned words are eligible — see buildQueue / buildChapterPracticeQueue.
+ * Custom Practice sessions build their own queue directly (see
+ * srs/queue.ts's buildDueQueue/buildRecentlyLearnedQueue) rather than going
+ * through this hook, since they aren't chapter-scoped.
  */
-export function useStudyQueue(
-  userId: string,
-  deckId: DeckId,
-  opts?: { chapterFilter?: string | null; practiceCount?: number | null },
-) {
+export function useStudyQueue(userId: string, deckId: DeckId, opts?: { chapterFilter?: string | null }) {
   const [items, setItems] = useState<QueueItem[] | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   const chapterFilter = opts?.chapterFilter
-  const practiceCount = opts?.practiceCount
 
   useEffect(() => {
     let cancelled = false
@@ -32,9 +30,7 @@ export function useStudyQueue(
       .then((cardStates) => {
         if (cancelled) return
         const allWords = getWordsForDeck(deckId)
-        if (typeof practiceCount === 'number' && practiceCount > 0 && chapterFilter === undefined) {
-          setItems(buildCustomPracticeQueue(allWords, cardStates, practiceCount))
-        } else if (chapterFilter === undefined) {
+        if (chapterFilter === undefined) {
           setItems(buildQueue(allWords, cardStates, { today: todayIso() }))
         } else {
           const chapterWords = allWords.filter((w) => w.chapter === chapterFilter)
@@ -48,7 +44,7 @@ export function useStudyQueue(
     return () => {
       cancelled = true
     }
-  }, [userId, deckId, chapterFilter, practiceCount])
+  }, [userId, deckId, chapterFilter])
 
   return { items, loading: items === null && !error, error }
 }

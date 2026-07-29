@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import {
   buildChapterPracticeQueue,
+  buildDueQueue,
   buildQueue,
+  buildRecentlyLearnedQueue,
   compareChapters,
   getChapterLockInfo,
   getUnlearnedWords,
@@ -178,5 +180,65 @@ describe('sampleAcrossChapters', () => {
     const words = Array.from({ length: 50 }, (_, i) => makeWord(`w${i}`, '1-1'))
     const cardStates = new Map(words.map((w) => [w.id, dueState(TODAY)]))
     expect(sampleAcrossChapters(words, cardStates, 20)).toHaveLength(20)
+  })
+})
+
+describe('buildDueQueue', () => {
+  it('returns only due words when no count is given', () => {
+    const words = [makeWord('a', '1-1'), makeWord('b', '1-1')]
+    const cardStates = new Map([
+      ['a', dueState(TODAY)],
+      ['b', dueState('2099-01-01')],
+    ])
+    const queue = buildDueQueue(words, cardStates, { today: TODAY })
+    expect(queue.map((item) => item.word.id)).toEqual(['a'])
+  })
+
+  it('caps to count, sampling when there are more due words than requested', () => {
+    const words = Array.from({ length: 20 }, (_, i) => makeWord(`w${i}`, '1-1'))
+    const cardStates = new Map(words.map((w) => [w.id, dueState(TODAY)]))
+    const queue = buildDueQueue(words, cardStates, { today: TODAY, count: 5 })
+    expect(queue).toHaveLength(5)
+  })
+
+  it('returns all due words unmodified when count exceeds availability', () => {
+    const words = [makeWord('a', '1-1'), makeWord('b', '1-1')]
+    const cardStates = new Map(words.map((w) => [w.id, dueState(TODAY)]))
+    expect(buildDueQueue(words, cardStates, { today: TODAY, count: 10 })).toHaveLength(2)
+  })
+})
+
+describe('buildRecentlyLearnedQueue', () => {
+  function learnedState(learnedAt: string): CardState {
+    return { easeFactor: 2.5, intervalDays: 1, repetitions: 1, dueDate: '2099-01-01', learnedAt }
+  }
+
+  it('orders words by learnedAt, most recent first', () => {
+    const words = [makeWord('a', '1-1'), makeWord('b', '1-1'), makeWord('c', '1-1')]
+    const cardStates = new Map([
+      ['a', learnedState('2026-07-01T00:00:00.000Z')],
+      ['b', learnedState('2026-07-20T00:00:00.000Z')],
+      ['c', learnedState('2026-07-10T00:00:00.000Z')],
+    ])
+    const queue = buildRecentlyLearnedQueue(words, cardStates, 3)
+    expect(queue.map((item) => item.word.id)).toEqual(['b', 'c', 'a'])
+  })
+
+  it('caps to the requested count', () => {
+    const words = Array.from({ length: 10 }, (_, i) => makeWord(`w${i}`, '1-1'))
+    const cardStates = new Map(
+      words.map((w, i) => [w.id, learnedState(`2026-07-${String(i + 1).padStart(2, '0')}T00:00:00.000Z`)]),
+    )
+    expect(buildRecentlyLearnedQueue(words, cardStates, 4)).toHaveLength(4)
+  })
+
+  it('excludes words with no learnedAt (learned before this feature shipped)', () => {
+    const words = [makeWord('a', '1-1'), makeWord('b', '1-1')]
+    const cardStates = new Map([
+      ['a', dueState(TODAY)], // no learnedAt
+      ['b', learnedState('2026-07-01T00:00:00.000Z')],
+    ])
+    const queue = buildRecentlyLearnedQueue(words, cardStates, 10)
+    expect(queue.map((item) => item.word.id)).toEqual(['b'])
   })
 })

@@ -61,4 +61,21 @@ describe('scheduleReview', () => {
     const good = scheduleReview(newCardState(TODAY), 2, TODAY)
     expect(hard.easeFactor).toBeLessThan(good.easeFactor)
   })
+
+  it('newCardState sets learnedAt', () => {
+    const state = newCardState(TODAY)
+    expect(state.learnedAt).toBeDefined()
+  })
+
+  it('preserves learnedAt across an Again review', () => {
+    const state = { ...newCardState(TODAY), learnedAt: '2026-07-01T00:00:00.000Z' }
+    const next = scheduleReview(state, 0, TODAY)
+    expect(next.learnedAt).toBe('2026-07-01T00:00:00.000Z')
+  })
+
+  it('preserves learnedAt across a graded (Hard/Good/Easy) review', () => {
+    const state = { ...newCardState(TODAY), learnedAt: '2026-07-01T00:00:00.000Z' }
+    const next = scheduleReview(state, 2, TODAY)
+    expect(next.learnedAt).toBe('2026-07-01T00:00:00.000Z')
+  })
 })

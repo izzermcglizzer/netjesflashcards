@@ -17,13 +17,6 @@ import { setLastDeckId } from '../../utils/lastDeck'
 import { xpIntoCurrentLevel, xpToNextLevel } from '../../gamification/xp'
 import type { DeckId } from '../../data/words.types'
 
-const MODES: { id: string; label: string; subtitle: string; icon: string; pose: MascotPose }[] = [
-  { id: 'classic', label: 'Flip Cards', subtitle: 'Review words and meanings', icon: '🗂️', pose: 'reading' },
-  { id: 'multipleChoice', label: 'Multiple Choice', subtitle: 'Test your knowledge', icon: '✅', pose: 'thinking' },
-  { id: 'typing', label: 'Type It', subtitle: "Type what you've learned", icon: '⌨️', pose: 'typing' },
-  { id: 'listening', label: 'Listening', subtitle: 'Listen and understand', icon: '🎧', pose: 'headphones' },
-]
-
 function todayIso(): string {
   return new Date().toISOString().slice(0, 10)
 }
@@ -70,8 +63,6 @@ export function HomeDashboard() {
   const [profile, setProfile] = useState<Profile | null>(null)
   const [progress, setProgress] = useState<DeckProgress | null>(null)
   const [locked, setLocked] = useState<boolean | null>(null)
-  const [selectedMode, setSelectedMode] = useState<string | null>(null)
-  const [practiceCount, setPracticeCount] = useState(1)
 
   const deck = decks.find((d) => d.id === deckId)
 
@@ -91,25 +82,6 @@ export function HomeDashboard() {
       cancelled = true
     }
   }, [userId, deckId])
-
-  useEffect(() => {
-    if (!progress) return
-    setPracticeCount((current) => {
-      if (progress.studied <= 0) return 1
-      const suggested = Math.min(10, progress.studied)
-      return current > progress.studied ? progress.studied : current < 1 ? suggested : current
-    })
-  }, [progress])
-
-  function handleSelectMode(modeId: string) {
-    if ((progress?.studied ?? 0) === 0) return
-    setSelectedMode((current) => (current === modeId ? null : modeId))
-  }
-
-  function startSpecificPractice() {
-    if (!selectedMode || !deckId || !progress || progress.studied === 0) return
-    navigate(`/deck/${deckId}/study/${selectedMode}?count=${Math.min(practiceCount, progress.studied)}`)
-  }
 
   if (!deck) return null
 
@@ -207,67 +179,15 @@ export function HomeDashboard() {
         <h2 className="app-section-title mb-3">Practice a specific skill</h2>
         <p className="mb-3 -mt-2 text-xs text-ink-light">Only words you've already learned show up here.</p>
         <div className="flex flex-col gap-3">
-          {MODES.map((m) => (
-            <div key={m.id} className="flex flex-col gap-3">
-              <ActionRow
-                icon={m.icon}
-                label={m.label}
-                subtitle={selectedMode === m.id ? `Selected • ${m.subtitle}` : m.subtitle}
-                pose={m.pose}
-                onClick={() => handleSelectMode(m.id)}
-                disabled={(progress?.studied ?? 0) === 0}
-              />
-
-              {progress && progress.studied > 0 && selectedMode === m.id && (
-                <Card className="space-y-4 bg-brand-purple/8">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <p className="font-extrabold text-ink">Choose how many learned cards to practice</p>
-                      <p className="text-sm text-ink-light">
-                        You have {progress.studied} learned cards in this level. Practice any amount up to all of them.
-                      </p>
-                    </div>
-                    <Pill tone="purple">{practiceCount} cards</Pill>
-                  </div>
-
-                  <input
-                    type="range"
-                    min={1}
-                    max={progress.studied}
-                    step={1}
-                    value={practiceCount}
-                    onChange={(e) => setPracticeCount(Number(e.target.value))}
-                    className="w-full accent-[var(--color-brand-purple)]"
-                  />
-
-                  <div className="grid grid-cols-4 gap-2">
-                    {[5, 10, 20, progress.studied].map((count, i) => {
-                      const value = Math.min(count, progress.studied)
-                      const label = i === 3 ? 'All' : String(value)
-                      return (
-                        <button
-                          key={`${label}-${value}`}
-                          type="button"
-                          onClick={() => setPracticeCount(value)}
-                          className={`rounded-xl border-2 px-3 py-2 text-sm font-extrabold ${
-                            practiceCount === value
-                              ? 'border-brand-purple bg-brand-purple text-white'
-                              : 'border-cloud-dark bg-white text-ink'
-                          }`}
-                        >
-                          {label}
-                        </button>
-                      )
-                    })}
-                  </div>
-
-                  <ChunkyButton variant="purple" fullWidth onClick={startSpecificPractice}>
-                    Start {m.label}
-                  </ChunkyButton>
-                </Card>
-              )}
-            </div>
-          ))}
+          <ActionRow
+            icon="🎯"
+            label="Custom Practice"
+            subtitle="Pick your modes and how many cards"
+            pose="thinking"
+            iconBg="bg-brand-purple/10"
+            disabled={(progress?.studied ?? 0) === 0}
+            onClick={() => navigate(`/deck/${deckId}/custom-practice`)}
+          />
 
           {progress &&
             (progress.total > 0 && progress.studied === progress.total ? (
