@@ -122,66 +122,234 @@
   "deck1-1777122682938": {
     "sentences": [
       {
+        "formLabel": "infinitive",
         "nl": "Ik moet nu naar mijn werk.",
-        "en": "I have to go to work now."
+        "en": "I have to go to work now.",
+        "highlightNl": "moet",
+        "highlightEn": "have to"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik moest gisteren hard werken.",
+        "en": "I had to work hard yesterday.",
+        "highlightNl": "moest",
+        "highlightEn": "had to"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb dat altijd gemoeten.",
+        "en": "I have always had to do that.",
+        "highlightNl": "gemoeten",
+        "highlightEn": "had to"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"Moeten\" is een modaal werkwoord: geen -t in het enkelvoud (\"ik moet\"). Het deelwoord \"gemoeten\" is zeldzaam.",
+      "en": "English \"must\" has no past tense at all (you have to say \"had to\" instead) — Dutch \"moeten\" conjugates fully across all tenses: moet, moest, gemoeten."
+    }
   },
   "deck1-1777122682944": {
     "sentences": [
       {
+        "formLabel": "infinitive",
         "nl": "Wat ga je vandaag doen?",
-        "en": "What are you going to do today?"
+        "en": "What are you going to do today?",
+        "highlightNl": "doen",
+        "highlightEn": "do"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Wat deed je gisteren?",
+        "en": "What did you do yesterday?",
+        "highlightNl": "deed",
+        "highlightEn": "did"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb dat al gedaan.",
+        "en": "I have already done that.",
+        "highlightNl": "gedaan",
+        "highlightEn": "done"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"Doen\" is onregelmatig: deed (verleden tijd), gedaan (voltooid deelwoord) volgen geen vast patroon.",
+      "en": "\"Doen\" (to do) is irregular in Dutch too, similar to English \"do → did → done\" — none of the forms follow the normal -de/-te pattern."
+    }
   },
   "deck1-1777122682946": {
     "sentences": [
       {
+        "formLabel": "infinitive",
         "nl": "Ik ga eten maken.",
-        "en": "I am going to make food."
+        "en": "I am going to make food.",
+        "highlightNl": "maken",
+        "highlightEn": "make"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik maakte gisteren een foto.",
+        "en": "I made a photo yesterday.",
+        "highlightNl": "maakte",
+        "highlightEn": "made"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb dit zelf gemaakt.",
+        "en": "I made this myself.",
+        "highlightNl": "gemaakt",
+        "highlightEn": "made"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"maken\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (maakte), en ge- + stam + -d/-t voor het voltooid deelwoord (gemaakt), gebruikt met \"hebben\".",
+      "en": "\"maken\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"maakte\") and a ge-...-d/t form for the past participle (\"gemaakt\"), paired with \"hebben\" (to have)."
+    }
   },
   "deck1-1777122682948": {
     "sentences": [
       {
-        "nl": "Ik woon al vijf jaar in Utrecht.",
-        "en": "I've lived in Utrecht for five years."
+        "formLabel": "infinitive",
+        "nl": "Ik wil in Amsterdam wonen.",
+        "en": "I want to live in Amsterdam.",
+        "highlightNl": "wonen",
+        "highlightEn": "live"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik woonde vroeger in Utrecht.",
+        "en": "I used to live in Utrecht.",
+        "highlightNl": "woonde",
+        "highlightEn": "used to live"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb daar vijf jaar gewoond.",
+        "en": "I have lived there for five years.",
+        "highlightNl": "gewoond",
+        "highlightEn": "lived"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"wonen\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (woonde), en ge- + stam + -d/-t voor het voltooid deelwoord (gewoond), gebruikt met \"hebben\".",
+      "en": "\"wonen\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"woonde\") and a ge-...-d/t form for the past participle (\"gewoond\"), paired with \"hebben\" (to have)."
+    }
   },
   "deck1-1777122682950": {
     "sentences": [
       {
-        "nl": "Ik werk elke dag tot vijf uur.",
-        "en": "I work every day until five o'clock."
+        "formLabel": "infinitive",
+        "nl": "Ik ga vandaag hard werken.",
+        "en": "I am going to work hard today.",
+        "highlightNl": "werken",
+        "highlightEn": "work"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik werkte gisteren tot laat.",
+        "en": "I worked until late yesterday.",
+        "highlightNl": "werkte",
+        "highlightEn": "worked"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb hier drie jaar gewerkt.",
+        "en": "I have worked here for three years.",
+        "highlightNl": "gewerkt",
+        "highlightEn": "worked"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"werken\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (werkte), en ge- + stam + -d/-t voor het voltooid deelwoord (gewerkt), gebruikt met \"hebben\".",
+      "en": "\"werken\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"werkte\") and a ge-...-d/t form for the past participle (\"gewerkt\"), paired with \"hebben\" (to have)."
+    }
   },
   "deck1-1777122682956": {
     "sentences": [
       {
-        "nl": "Ik leer elke week nieuwe woorden.",
-        "en": "I learn new words every week."
+        "formLabel": "infinitive",
+        "nl": "Ik wil Nederlands leren.",
+        "en": "I want to learn Dutch.",
+        "highlightNl": "leren",
+        "highlightEn": "learn"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik leerde dat op school.",
+        "en": "I learned that at school.",
+        "highlightNl": "leerde",
+        "highlightEn": "learned"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb veel geleerd dit jaar.",
+        "en": "I have learned a lot this year.",
+        "highlightNl": "geleerd",
+        "highlightEn": "learned"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"leren\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (leerde), en ge- + stam + -d/-t voor het voltooid deelwoord (geleerd), gebruikt met \"hebben\".",
+      "en": "\"leren\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"leerde\") and a ge-...-d/t form for the past participle (\"geleerd\"), paired with \"hebben\" (to have)."
+    }
   },
   "deck1-1777122682958": {
     "sentences": [
       {
+        "formLabel": "infinitive",
         "nl": "We praten graag over muziek.",
-        "en": "We like to talk about music."
+        "en": "We like to talk about music.",
+        "highlightNl": "praten",
+        "highlightEn": "talk"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "We praatten de hele avond.",
+        "en": "We talked all evening.",
+        "highlightNl": "praatten",
+        "highlightEn": "talked"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "We hebben lang gepraat.",
+        "en": "We talked for a long time.",
+        "highlightNl": "gepraat",
+        "highlightEn": "talked"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"praten\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (praatte), en ge- + stam + -d/-t voor het voltooid deelwoord (gepraat), gebruikt met \"hebben\".",
+      "en": "\"praten\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"praatte\") and a ge-...-d/t form for the past participle (\"gepraat\"), paired with \"hebben\" (to have)."
+    }
   },
   "deck1-1777122682960": {
     "sentences": [
       {
+        "formLabel": "infinitive",
         "nl": "Kun je me het verhaal vertellen?",
-        "en": "Can you tell me the story?"
+        "en": "Can you tell me the story?",
+        "highlightNl": "vertellen",
+        "highlightEn": "tell"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ze vertelde een grappig verhaal.",
+        "en": "She told a funny story.",
+        "highlightNl": "vertelde",
+        "highlightEn": "told"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb het geheim verteld.",
+        "en": "I told the secret.",
+        "highlightNl": "verteld",
+        "highlightEn": "told"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"vertellen\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (vertelde), en ge- + stam + -d/-t voor het voltooid deelwoord (verteld), gebruikt met \"hebben\".",
+      "en": "\"vertellen\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"vertelde\") and a ge-...-d/t form for the past participle (\"verteld\"), paired with \"hebben\" (to have)."
+    }
   },
   "deck1-1777122682982": {
     "sentences": [
@@ -1418,10 +1586,31 @@
   "deck1-1777122683448": {
     "sentences": [
       {
-        "nl": "Hij vaart elk weekend op zijn boot.",
-        "en": "He sails on his boat every weekend."
+        "formLabel": "infinitive",
+        "nl": "We gaan op het meer varen.",
+        "en": "We are going to sail on the lake.",
+        "highlightNl": "varen",
+        "highlightEn": "sail"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Hij vaarde elk weekend.",
+        "en": "He sailed every weekend.",
+        "highlightNl": "vaarde",
+        "highlightEn": "sailed"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "We zijn naar het eiland gevaren.",
+        "en": "We have sailed to the island.",
+        "highlightNl": "gevaren",
+        "highlightEn": "sailed"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"varen\" is een werkwoord van beweging: verleden tijd vaarde, voltooid deelwoord gevaren — met \"zijn\", niet \"hebben\".",
+      "en": "\"varen\" describes motion/change, so — unlike most Dutch verbs — its perfect tense uses \"zijn\" (to be) as the auxiliary instead of \"hebben\" (to have). English always uses \"have\" here regardless (\"I have walked\"), which is a key difference to remember."
+    }
   },
   "deck1-1777122683450": {
     "sentences": [
@@ -1434,10 +1623,31 @@
   "deck1-1777122683452": {
     "sentences": [
       {
+        "formLabel": "infinitive",
         "nl": "We vliegen morgen naar Spanje.",
-        "en": "We are flying to Spain tomorrow."
+        "en": "We are flying to Spain tomorrow.",
+        "highlightNl": "vliegen",
+        "highlightEn": "fly"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Het vliegtuig vloog over de stad.",
+        "en": "The plane flew over the city.",
+        "highlightNl": "vloog",
+        "highlightEn": "flew"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik ben nog nooit gevlogen.",
+        "en": "I have never flown.",
+        "highlightNl": "gevlogen",
+        "highlightEn": "flown"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"vliegen\" is een sterk werkwoord van beweging: klinkerverandering (vloog, gevlogen) én \"zijn\" als hulpwerkwoord, niet \"hebben\".",
+      "en": "\"vliegen\" is a strong (vowel-changing) verb of motion or change — it takes \"zijn\" (to be) as its auxiliary rather than \"hebben\" (to have), unlike English which always uses \"have\" in the perfect tense."
+    }
   },
   "deck1-1777122683454": {
     "sentences": [
@@ -1450,26 +1660,89 @@
   "deck1-1777122683456": {
     "sentences": [
       {
+        "formLabel": "infinitive",
         "nl": "Ik fiets elke dag naar mijn werk.",
-        "en": "I cycle to work every day."
+        "en": "I cycle to work every day.",
+        "highlightNl": "fiets",
+        "highlightEn": "cycle"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik fietste gisteren naar school.",
+        "en": "I cycled to school yesterday.",
+        "highlightNl": "fietste",
+        "highlightEn": "cycled"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik ben helemaal hierheen gefietst.",
+        "en": "I have cycled all the way here.",
+        "highlightNl": "gefietst",
+        "highlightEn": "cycled"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"fietsen\" is een werkwoord van beweging: verleden tijd fietste, voltooid deelwoord gefietst — met \"zijn\", niet \"hebben\".",
+      "en": "\"fietsen\" describes motion/change, so — unlike most Dutch verbs — its perfect tense uses \"zijn\" (to be) as the auxiliary instead of \"hebben\" (to have). English always uses \"have\" here regardless (\"I have walked\"), which is a key difference to remember."
+    }
   },
   "deck1-1777122683458": {
     "sentences": [
       {
+        "formLabel": "infinitive",
         "nl": "We lopen samen naar school.",
-        "en": "We walk to school together."
+        "en": "We walk to school together.",
+        "highlightNl": "lopen",
+        "highlightEn": "walk"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Hij liep snel naar huis.",
+        "en": "He walked home quickly.",
+        "highlightNl": "liep",
+        "highlightEn": "walked"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik ben de hele dag gelopen.",
+        "en": "I have walked all day.",
+        "highlightNl": "gelopen",
+        "highlightEn": "walked"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"lopen\" is een sterk werkwoord van beweging: klinkerverandering (liep, gelopen) én \"zijn\" als hulpwerkwoord, niet \"hebben\".",
+      "en": "\"lopen\" is a strong (vowel-changing) verb of motion or change — it takes \"zijn\" (to be) as its auxiliary rather than \"hebben\" (to have), unlike English which always uses \"have\" in the perfect tense."
+    }
   },
   "deck1-1777122683460": {
     "sentences": [
       {
+        "formLabel": "infinitive",
         "nl": "We wandelen graag in het bos.",
-        "en": "We like to stroll in the forest."
+        "en": "We like to stroll in the forest.",
+        "highlightNl": "wandelen",
+        "highlightEn": "stroll"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "We wandelden langs de rivier.",
+        "en": "We strolled along the river.",
+        "highlightNl": "wandelden",
+        "highlightEn": "strolled"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "We zijn urenlang gewandeld.",
+        "en": "We have strolled for hours.",
+        "highlightNl": "gewandeld",
+        "highlightEn": "strolled"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"wandelen\" is een werkwoord van beweging: verleden tijd wandelde, voltooid deelwoord gewandeld — met \"zijn\", niet \"hebben\".",
+      "en": "\"wandelen\" describes motion/change, so — unlike most Dutch verbs — its perfect tense uses \"zijn\" (to be) as the auxiliary instead of \"hebben\" (to have). English always uses \"have\" here regardless (\"I have walked\"), which is a key difference to remember."
+    }
   },
   "deck1-1777122683466": {
     "sentences": [
@@ -1506,18 +1779,60 @@
   "deck1-1777122683474": {
     "sentences": [
       {
+        "formLabel": "infinitive",
         "nl": "We reizen graag samen.",
-        "en": "We like to travel together."
+        "en": "We like to travel together.",
+        "highlightNl": "reizen",
+        "highlightEn": "travel"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ze reisde vorig jaar door Azië.",
+        "en": "She traveled through Asia last year.",
+        "highlightNl": "reisde",
+        "highlightEn": "traveled"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik ben veel gereisd.",
+        "en": "I have traveled a lot.",
+        "highlightNl": "gereisd",
+        "highlightEn": "traveled"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"reizen\" is een werkwoord van beweging: verleden tijd reisde, voltooid deelwoord gereisd — met \"zijn\", niet \"hebben\".",
+      "en": "\"reizen\" describes motion/change, so — unlike most Dutch verbs — its perfect tense uses \"zijn\" (to be) as the auxiliary instead of \"hebben\" (to have). English always uses \"have\" here regardless (\"I have walked\"), which is a key difference to remember."
+    }
   },
   "deck1-1777122683484": {
     "sentences": [
       {
+        "formLabel": "infinitive",
         "nl": "Ik hoor muziek buiten.",
-        "en": "I hear music outside."
+        "en": "I hear music outside.",
+        "highlightNl": "hoor",
+        "highlightEn": "hear"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik hoorde een raar geluid.",
+        "en": "I heard a strange sound.",
+        "highlightNl": "hoorde",
+        "highlightEn": "heard"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb het nieuws al gehoord.",
+        "en": "I have already heard the news.",
+        "highlightNl": "gehoord",
+        "highlightEn": "heard"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"horen\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (hoorde), en ge- + stam + -d/-t voor het voltooid deelwoord (gehoord), gebruikt met \"hebben\".",
+      "en": "\"horen\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"hoorde\") and a ge-...-d/t form for the past participle (\"gehoord\"), paired with \"hebben\" (to have)."
+    }
   },
   "deck1-1777122683486": {
     "sentences": [
@@ -1530,10 +1845,31 @@
   "deck1-1777122683488": {
     "sentences": [
       {
+        "formLabel": "infinitive",
         "nl": "Ik kan de bloemen ruiken.",
-        "en": "I can smell the flowers."
+        "en": "I can smell the flowers.",
+        "highlightNl": "ruiken",
+        "highlightEn": "smell"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Het rook naar verse koffie.",
+        "en": "It smelled like fresh coffee.",
+        "highlightNl": "rook",
+        "highlightEn": "smelled"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb nooit zoiets geroken.",
+        "en": "I have never smelled anything like it.",
+        "highlightNl": "geroken",
+        "highlightEn": "smelled"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"ruiken\" is een sterk (onregelmatig) werkwoord: de klinker verandert (rook, geroken) in plaats van een vaste uitgang. Gebruikt \"hebben\".",
+      "en": "\"ruiken\" is a strong (irregular) verb — the vowel itself changes for the past tense (\"rook\") and past participle (\"geroken\"), similar to English irregular verbs like give→gave→given. It still takes \"hebben\" (to have) in the perfect tense."
+    }
   },
   "deck1-1777122683496": {
     "sentences": [
@@ -1594,10 +1930,31 @@
   "deck1-1777122683514": {
     "sentences": [
       {
-        "nl": "Het sneeuwt de hele nacht.",
-        "en": "It is snowing all night."
+        "formLabel": "infinitive",
+        "nl": "Het gaat vannacht sneeuwen.",
+        "en": "It is going to snow tonight.",
+        "highlightNl": "sneeuwen",
+        "highlightEn": "snow"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Het sneeuwde de hele week.",
+        "en": "It snowed all week.",
+        "highlightNl": "sneeuwde",
+        "highlightEn": "snowed"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Het heeft nauwelijks gesneeuwd dit jaar.",
+        "en": "It has barely snowed this year.",
+        "highlightNl": "gesneeuwd",
+        "highlightEn": "snowed"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"sneeuwen\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (sneeuwde), en ge- + stam + -d/-t voor het voltooid deelwoord (gesneeuwd), gebruikt met \"hebben\".",
+      "en": "\"sneeuwen\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"sneeuwde\") and a ge-...-d/t form for the past participle (\"gesneeuwd\"), paired with \"hebben\" (to have)."
+    }
   },
   "deck1-1777122683516": {
     "sentences": [
@@ -1810,50 +2167,176 @@
   "deck1-1777122683616": {
     "sentences": [
       {
+        "formLabel": "infinitive",
         "nl": "Ik geloof je verhaal niet.",
-        "en": "I don't believe your story."
+        "en": "I don't believe your story.",
+        "highlightNl": "geloof",
+        "highlightEn": "believe"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik geloofde hem meteen.",
+        "en": "I believed him right away.",
+        "highlightNl": "geloofde",
+        "highlightEn": "believed"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb dat altijd geloofd.",
+        "en": "I have always believed that.",
+        "highlightNl": "geloofd",
+        "highlightEn": "believed"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"geloven\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (geloofde), en ge- + stam + -d/-t voor het voltooid deelwoord (geloofd), gebruikt met \"hebben\".",
+      "en": "\"geloven\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"geloofde\") and a ge-...-d/t form for the past participle (\"geloofd\"), paired with \"hebben\" (to have)."
+    }
   },
   "deck1-1777122683632": {
     "sentences": [
       {
+        "formLabel": "infinitive",
         "nl": "Ik lees graag voor het slapen.",
-        "en": "I like to read before sleeping."
+        "en": "I like to read before sleeping.",
+        "highlightNl": "lees",
+        "highlightEn": "read"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik las gisteren een goed boek.",
+        "en": "I read a good book yesterday.",
+        "highlightNl": "las",
+        "highlightEn": "read"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb dat artikel al gelezen.",
+        "en": "I have already read that article.",
+        "highlightNl": "gelezen",
+        "highlightEn": "read"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"lezen\" is een sterk (onregelmatig) werkwoord: de klinker verandert (las, gelezen) in plaats van een vaste uitgang. Gebruikt \"hebben\".",
+      "en": "\"lezen\" is a strong (irregular) verb — the vowel itself changes for the past tense (\"las\") and past participle (\"gelezen\"), similar to English irregular verbs like give→gave→given. It still takes \"hebben\" (to have) in the perfect tense."
+    }
   },
   "deck1-1777122683634": {
     "sentences": [
       {
+        "formLabel": "infinitive",
         "nl": "Ze schrijft elke dag in haar dagboek.",
-        "en": "She writes in her diary every day."
+        "en": "She writes in her diary every day.",
+        "highlightNl": "schrijft",
+        "highlightEn": "writes"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik schreef hem een lange brief.",
+        "en": "I wrote him a long letter.",
+        "highlightNl": "schreef",
+        "highlightEn": "wrote"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb het boek zelf geschreven.",
+        "en": "I have written the book myself.",
+        "highlightNl": "geschreven",
+        "highlightEn": "written"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"schrijven\" is een sterk (onregelmatig) werkwoord: de klinker verandert (schreef, geschreven) in plaats van een vaste uitgang. Gebruikt \"hebben\".",
+      "en": "\"schrijven\" is a strong (irregular) verb — the vowel itself changes for the past tense (\"schreef\") and past participle (\"geschreven\"), similar to English irregular verbs like give→gave→given. It still takes \"hebben\" (to have) in the perfect tense."
+    }
   },
   "deck1-1777122683662": {
     "sentences": [
       {
-        "nl": "Ik sport drie keer per week.",
-        "en": "I exercise three times a week."
+        "formLabel": "infinitive",
+        "nl": "Ik ga drie keer per week sporten.",
+        "en": "I exercise three times a week.",
+        "highlightNl": "sporten",
+        "highlightEn": "exercise"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik sportte gisteren een uur.",
+        "en": "I exercised for an hour yesterday.",
+        "highlightNl": "sportte",
+        "highlightEn": "exercised"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb vandaag al gesport.",
+        "en": "I have already exercised today.",
+        "highlightNl": "gesport",
+        "highlightEn": "exercised"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"sporten\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (sportte), en ge- + stam + -d/-t voor het voltooid deelwoord (gesport), gebruikt met \"hebben\".",
+      "en": "\"sporten\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"sportte\") and a ge-...-d/t form for the past participle (\"gesport\"), paired with \"hebben\" (to have)."
+    }
   },
   "deck1-1777122683664": {
     "sentences": [
       {
+        "formLabel": "infinitive",
         "nl": "Ik drink elke ochtend water.",
-        "en": "I drink water every morning."
+        "en": "I drink water every morning.",
+        "highlightNl": "drink",
+        "highlightEn": "drink"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik dronk een kop koffie.",
+        "en": "I drank a cup of coffee.",
+        "highlightNl": "dronk",
+        "highlightEn": "drank"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb al genoeg water gedronken.",
+        "en": "I have already drunk enough water.",
+        "highlightNl": "gedronken",
+        "highlightEn": "drunk"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"drinken\" is een sterk (onregelmatig) werkwoord: de klinker verandert (dronk, gedronken) in plaats van een vaste uitgang. Gebruikt \"hebben\".",
+      "en": "\"drinken\" is a strong (irregular) verb — the vowel itself changes for the past tense (\"dronk\") and past participle (\"gedronken\"), similar to English irregular verbs like give→gave→given. It still takes \"hebben\" (to have) in the perfect tense."
+    }
   },
   "deck1-1777122683666": {
     "sentences": [
       {
+        "formLabel": "infinitive",
         "nl": "We eten samen om zes uur.",
-        "en": "We eat together at six o'clock."
+        "en": "We eat together at six.",
+        "highlightNl": "eten",
+        "highlightEn": "eat"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik at gisteren pasta.",
+        "en": "I ate pasta yesterday.",
+        "highlightNl": "at",
+        "highlightEn": "ate"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb al gegeten.",
+        "en": "I have already eaten.",
+        "highlightNl": "gegeten",
+        "highlightEn": "eaten"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"eten\" is een sterk (onregelmatig) werkwoord: de klinker verandert (at, gegeten) in plaats van een vaste uitgang. Gebruikt \"hebben\".",
+      "en": "\"eten\" is a strong (irregular) verb — the vowel itself changes for the past tense (\"at\") and past participle (\"gegeten\"), similar to English irregular verbs like give→gave→given. It still takes \"hebben\" (to have) in the perfect tense."
+    }
   },
   "deck1-1777122683668": {
     "sentences": [
@@ -1962,10 +2445,31 @@
   "deck1-1777122683694": {
     "sentences": [
       {
+        "formLabel": "infinitive",
         "nl": "Kun je me even helpen?",
-        "en": "Can you help me for a moment?"
+        "en": "Can you help me for a moment?",
+        "highlightNl": "helpen",
+        "highlightEn": "help"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ze hielp me met mijn huiswerk.",
+        "en": "She helped me with my homework.",
+        "highlightNl": "hielp",
+        "highlightEn": "helped"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb hem verhuizen geholpen.",
+        "en": "I have helped him move.",
+        "highlightNl": "geholpen",
+        "highlightEn": "helped"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"helpen\" is een sterk (onregelmatig) werkwoord: de klinker verandert (hielp, geholpen) in plaats van een vaste uitgang. Gebruikt \"hebben\".",
+      "en": "\"helpen\" is a strong (irregular) verb — the vowel itself changes for the past tense (\"hielp\") and past participle (\"geholpen\"), similar to English irregular verbs like give→gave→given. It still takes \"hebben\" (to have) in the perfect tense."
+    }
   },
   "deck1-1777122683696": {
     "sentences": [
@@ -2210,10 +2714,31 @@
   "deck1-1777122683758": {
     "sentences": [
       {
-        "nl": "Zijn vinger begon te bloeden.",
-        "en": "His finger started to bleed."
+        "formLabel": "infinitive",
+        "nl": "Zijn vinger begint te bloeden.",
+        "en": "His finger starts to bleed.",
+        "highlightNl": "bloeden",
+        "highlightEn": "bleed"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "De wond bloedde erg.",
+        "en": "The wound bled heavily.",
+        "highlightNl": "bloedde",
+        "highlightEn": "bled"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Het heeft een tijdje gebloed.",
+        "en": "It has bled for a while.",
+        "highlightNl": "gebloed",
+        "highlightEn": "bled"
       }
-    ]
+    ],
+    "grammarNote": {
+      "nl": "\"bloeden\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (bloedde), en ge- + stam + -d/-t voor het voltooid deelwoord (gebloed), gebruikt met \"hebben\".",
+      "en": "\"bloeden\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"bloedde\") and a ge-...-d/t form for the past participle (\"gebloed\"), paired with \"hebben\" (to have)."
+    }
   },
   "deck1-1777122683786": {
     "sentences": [
@@ -2478,5 +3003,1136 @@
         "en": "We like to live in the countryside."
       }
     ]
+  },
+  "deck1-1777122682930": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik wil dokter zijn.",
+        "en": "I want to be a doctor.",
+        "highlightNl": "zijn",
+        "highlightEn": "be"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik was gisteren ziek.",
+        "en": "I was sick yesterday.",
+        "highlightNl": "was",
+        "highlightEn": "was"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik ben nog nooit in Parijs geweest.",
+        "en": "I have never been to Paris.",
+        "highlightNl": "geweest",
+        "highlightEn": "been"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Zijn\" is het meest onregelmatige werkwoord van het Nederlands: ik ben, jij bent, hij is, wij zijn — allemaal anders. Het voltooid deelwoord gebruikt \"zijn\" als hulpwerkwoord, niet \"hebben\".",
+      "en": "\"Zijn\" (to be) is Dutch's most irregular verb — just like English \"to be\" (am/is/are, was/were, been), every form looks different. It also uniquely uses itself (\"zijn\") as the auxiliary for its own perfect tense, not \"hebben\"."
+    }
+  },
+  "deck1-1777122682932": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik wil een hond hebben.",
+        "en": "I want to have a dog.",
+        "highlightNl": "hebben",
+        "highlightEn": "have"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik had gisteren geen tijd.",
+        "en": "I had no time yesterday.",
+        "highlightNl": "had",
+        "highlightEn": "had"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb altijd geluk gehad.",
+        "en": "I have always had luck.",
+        "highlightNl": "gehad",
+        "highlightEn": "had"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Hebben\" is onregelmatig (ik heb, jij hebt, hij heeft) en wordt, net als in het Engels, gebruikt om de voltooid tijd van bijna alle andere werkwoorden te vormen.",
+      "en": "\"Hebben\" (to have) is irregular, and just like English \"have\", it doubles as the auxiliary used to build the perfect tense of most other Dutch verbs."
+    }
+  },
+  "deck1-1777122682934": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik kan goed zwemmen.",
+        "en": "I can swim well.",
+        "highlightNl": "kan",
+        "highlightEn": "can"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik kon dat als kind niet.",
+        "en": "I could not do that as a child.",
+        "highlightNl": "kon",
+        "highlightEn": "could"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb dat nooit gekund.",
+        "en": "I have never been able to do that.",
+        "highlightNl": "gekund",
+        "highlightEn": "been able"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Kunnen\" is een modaal werkwoord: enkelvoud \"ik/hij kan\" krijgt geen -t. Het voltooid deelwoord \"gekund\" wordt zelden gebruikt.",
+      "en": "Modal verbs like \"kunnen\" skip the usual -t ending in the singular (\"hij kan\", not \"kant\"). English modals like \"can\" have no true infinitive or past participle at all — Dutch modals do, even though the participle is rarely used in practice."
+    }
+  },
+  "deck1-1777122682936": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik wil naar huis gaan.",
+        "en": "I want to go home.",
+        "highlightNl": "wil",
+        "highlightEn": "want"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik wilde gisteren niet werken.",
+        "en": "I didn't want to work yesterday.",
+        "highlightNl": "wilde",
+        "highlightEn": "want"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb dat altijd gewild.",
+        "en": "I have always wanted that.",
+        "highlightNl": "gewild",
+        "highlightEn": "wanted"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Willen\" is een modaal werkwoord met een onregelmatig enkelvoud: \"ik wil\", niet \"ik wilt\".",
+      "en": "\"Willen\" (to want) is a modal verb with an irregular singular form (\"ik wil\", not \"wilt\"). Unlike English \"will\" (which has no past tense of its own), Dutch \"willen\" conjugates fully: wilde (past), gewild (participle)."
+    }
+  },
+  "deck1-1777122682940": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Je mag hier niet roken.",
+        "en": "You may not smoke here.",
+        "highlightNl": "mag",
+        "highlightEn": "may"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik mocht als kind geen snoep eten.",
+        "en": "I was not allowed to eat candy as a child.",
+        "highlightNl": "mocht",
+        "highlightEn": "allowed"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Dat heeft nooit gemogen.",
+        "en": "That has never been allowed.",
+        "highlightNl": "gemogen",
+        "highlightEn": "allowed"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Mogen\" is een modaal werkwoord met een onregelmatig enkelvoud: \"ik/jij/hij mag\" (geen -t).",
+      "en": "\"Mogen\" (may, to be allowed to) has an irregular singular (\"mag\", not \"maagt\"). Its past tense \"mocht\" looks nothing like the infinitive — just memorize it, similar to how English \"may\"/\"might\" don't follow a normal pattern either."
+    }
+  },
+  "deck1-1777122683122": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik mag hem wel.",
+        "en": "I like him.",
+        "highlightNl": "mag",
+        "highlightEn": "like"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik mocht haar meteen.",
+        "en": "I liked her right away.",
+        "highlightNl": "mocht",
+        "highlightEn": "liked"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb hem altijd gemogen.",
+        "en": "I have always liked him.",
+        "highlightNl": "gemogen",
+        "highlightEn": "liked"
+      }
+    ],
+    "grammarNote": {
+      "nl": "Dit is dezelfde \"mogen\" als \"mogen = may\", maar met een andere betekenis: iemand aardig vinden. De vervoeging is identiek.",
+      "en": "This is the same verb \"mogen\" as \"may/allowed to\" — Dutch reuses it for \"to like (a person)\" too. Same irregular conjugation (mag, mocht, gemogen), different meaning depending on context."
+    }
+  },
+  "deck1-1777122683130": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik moet dit boek lezen.",
+        "en": "I need to read this book.",
+        "highlightNl": "moet",
+        "highlightEn": "need to"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik moest dit gisteren doen.",
+        "en": "I needed to do this yesterday.",
+        "highlightNl": "moest",
+        "highlightEn": "needed to"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb dat altijd gemoeten.",
+        "en": "I have always needed to.",
+        "highlightNl": "gemoeten",
+        "highlightEn": "needed to"
+      }
+    ],
+    "grammarNote": {
+      "nl": "Zelfde werkwoord als \"moeten = must\", hier vertaald als \"nodig hebben (met een werkwoord)\".",
+      "en": "Same verb as \"moeten = must\" — Dutch uses one word for both \"must\" and \"need to (do something)\", where English separates them."
+    }
+  },
+  "deck1-1777122683132": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik heb een nieuwe jas nodig.",
+        "en": "I need a new coat.",
+        "highlightNl": "nodig",
+        "highlightEn": "need"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik had geld nodig.",
+        "en": "I needed money.",
+        "highlightNl": "nodig",
+        "highlightEn": "needed"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb dat boek altijd nodig gehad.",
+        "en": "I have always needed that book.",
+        "highlightNl": "nodig gehad",
+        "highlightEn": "needed"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Nodig hebben\" gebruik je met een zelfstandig naamwoord (een ding), terwijl \"moeten\" gebruikt wordt met een ander werkwoord.",
+      "en": "Dutch splits \"to need\" into two verbs depending on what follows: \"nodig hebben\" for needing a THING (a noun), and \"moeten\" for needing to DO something (another verb). English just uses \"need\" for both."
+    }
+  },
+  "deck1-1777122683134": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Je hoeft dat niet te doen.",
+        "en": "You don't need to do that.",
+        "highlightNl": "hoeft",
+        "highlightEn": "need"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik hoefde gisteren niet te werken.",
+        "en": "I didn't need to work yesterday.",
+        "highlightNl": "hoefde",
+        "highlightEn": "need"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Dat heb ik nooit hoeven doen.",
+        "en": "I've never had to do that.",
+        "highlightNl": "hoeven",
+        "highlightEn": "had to"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Hoeven\" wordt bijna altijd samen met \"niet\" of \"geen\" gebruikt — het bestaat eigenlijk alleen in de ontkennende vorm.",
+      "en": "\"Hoeven\" (to not need to) almost only appears together with \"niet\"/\"geen\" — it's the negative counterpart to \"moeten\", a distinction English doesn't make with a separate verb."
+    }
+  },
+  "deck1-1777122682952": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik kan dit niet begrijpen.",
+        "en": "I cannot understand this.",
+        "highlightNl": "begrijpen",
+        "highlightEn": "understand"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik begreep de vraag niet.",
+        "en": "I did not understand the question.",
+        "highlightNl": "begreep",
+        "highlightEn": "understand"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb het nu begrepen.",
+        "en": "I have understood it now.",
+        "highlightNl": "begrepen",
+        "highlightEn": "understood"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"begrijpen\" is een sterk (onregelmatig) werkwoord: de klinker verandert (begreep, begrepen) in plaats van een vaste uitgang. Gebruikt \"hebben\".",
+      "en": "\"begrijpen\" is a strong (irregular) verb — the vowel itself changes for the past tense (\"begreep\") and past participle (\"begrepen\"), similar to English irregular verbs like give→gave→given. It still takes \"hebben\" (to have) in the perfect tense."
+    }
+  },
+  "deck1-1777122682954": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik kan je goed verstaan.",
+        "en": "I can understand you well.",
+        "highlightNl": "verstaan",
+        "highlightEn": "understand"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik verstond haar niet door de muziek.",
+        "en": "I could not understand her over the music.",
+        "highlightNl": "verstond",
+        "highlightEn": "understand"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb elk woord verstaan.",
+        "en": "I understood every word.",
+        "highlightNl": "verstaan",
+        "highlightEn": "understood"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Verstaan\" gaat over geluid horen en begrijpen (bijv. een accent), terwijl \"begrijpen\" over concepten en ideeën gaat.",
+      "en": "Dutch splits \"to understand\" into two verbs: \"verstaan\" for understanding SOUND (hearing words clearly, an accent), and \"begrijpen\" for understanding IDEAS. English just uses \"understand\" for both."
+    }
+  },
+  "deck1-1777122682962": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik hoop op mooi weer.",
+        "en": "I hope for nice weather.",
+        "highlightNl": "hoop op",
+        "highlightEn": "hope for"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik hoopte op een prijs.",
+        "en": "I hoped for a prize.",
+        "highlightNl": "hoopte op",
+        "highlightEn": "hoped for"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb daar altijd op gehoopt.",
+        "en": "I have always hoped for that.",
+        "highlightNl": "gehoopt",
+        "highlightEn": "hoped"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Hopen\" hoort altijd samen met het voorzetsel \"op\" — een vaste combinatie, geen scheidbaar werkwoord.",
+      "en": "\"Hopen\" locks in the preposition \"op\" (\"hopen op\" = \"hope for\"). Dutch verbs often pair with a fixed preposition that doesn't literally match the English one."
+    }
+  },
+  "deck1-1777122683620": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik hoop op een leuke dag.",
+        "en": "I hope for a nice day.",
+        "highlightNl": "hoop op",
+        "highlightEn": "hope for"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik hoopte op regen.",
+        "en": "I hoped for rain.",
+        "highlightNl": "hoopte op",
+        "highlightEn": "hoped for"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb op beter nieuws gehoopt.",
+        "en": "I have hoped for better news.",
+        "highlightNl": "gehoopt",
+        "highlightEn": "hoped"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Hopen op\" is een vaste combinatie van werkwoord + voorzetsel, geen scheidbaar werkwoord.",
+      "en": "\"Hopen op\" (to hope for) is a fixed verb-preposition pair — the preposition \"op\" always follows \"hopen\"."
+    }
+  },
+  "deck1-1777122682964": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik wil tegen haar spreken.",
+        "en": "I want to speak to her.",
+        "highlightNl": "spreken",
+        "highlightEn": "speak"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik sprak gisteren tegen hem.",
+        "en": "I spoke to him yesterday.",
+        "highlightNl": "sprak",
+        "highlightEn": "spoke"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb tegen de directeur gesproken.",
+        "en": "I have spoken to the director.",
+        "highlightNl": "gesproken",
+        "highlightEn": "spoken"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Spreken\" is een sterk werkwoord (klinkerverandering: sprak, gesproken), gecombineerd met het vaste voorzetsel \"tegen\".",
+      "en": "\"Spreken\" (to speak) is a strong verb — its vowel changes for past tense and participle, like English speak→spoke→spoken. Here it pairs with the fixed preposition \"tegen\" (to/against)."
+    }
+  },
+  "deck1-1777122683372": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik kom uit Nederland.",
+        "en": "I come from the Netherlands.",
+        "highlightNl": "kom uit",
+        "highlightEn": "come from"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Hij kwam uit een klein dorp.",
+        "en": "He came from a small village.",
+        "highlightNl": "kwam uit",
+        "highlightEn": "came from"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ze is uit Spanje gekomen.",
+        "en": "She has come from Spain.",
+        "highlightNl": "gekomen",
+        "highlightEn": "come"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Komen\" is een sterk werkwoord van beweging (kwam, gekomen) en gebruikt \"zijn\" als hulpwerkwoord, niet \"hebben\".",
+      "en": "\"Komen\" (to come) is a strong motion verb that takes \"zijn\" (to be) as its auxiliary — English always uses \"have\" here (\"I have come\"), so this is a common mistake to watch for."
+    }
+  },
+  "deck1-1777122683464": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik moet nu naar het station rennen.",
+        "en": "I have to run to the station now.",
+        "highlightNl": "rennen",
+        "highlightEn": "run"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Hij rende snel weg.",
+        "en": "He ran away quickly.",
+        "highlightNl": "rende",
+        "highlightEn": "ran"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik ben de hele weg gerend.",
+        "en": "I have run the whole way.",
+        "highlightNl": "gerend",
+        "highlightEn": "run"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"rennen\" is een sterk werkwoord van beweging: klinkerverandering (rende, gerend) én \"zijn\" als hulpwerkwoord, niet \"hebben\".",
+      "en": "\"rennen\" is a strong (vowel-changing) verb of motion or change — it takes \"zijn\" (to be) as its auxiliary rather than \"hebben\" (to have), unlike English which always uses \"have\" in the perfect tense."
+    }
+  },
+  "deck1-1777122683476": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik ga volgend jaar verhuizen.",
+        "en": "I am going to move next year.",
+        "highlightNl": "verhuizen",
+        "highlightEn": "move"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "We verhuisden naar een groter huis.",
+        "en": "We moved to a bigger house.",
+        "highlightNl": "verhuisden",
+        "highlightEn": "moved"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik ben net verhuisd.",
+        "en": "I have just moved.",
+        "highlightNl": "verhuisd",
+        "highlightEn": "moved"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"verhuizen\" is een werkwoord van beweging: verleden tijd verhuisde, voltooid deelwoord verhuisd — met \"zijn\", niet \"hebben\".",
+      "en": "\"verhuizen\" describes motion/change, so — unlike most Dutch verbs — its perfect tense uses \"zijn\" (to be) as the auxiliary instead of \"hebben\" (to have). English always uses \"have\" here regardless (\"I have walked\"), which is a key difference to remember."
+    }
+  },
+  "deck1-1777122683478": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik wil haar graag ontmoeten.",
+        "en": "I would love to meet her.",
+        "highlightNl": "ontmoeten",
+        "highlightEn": "meet"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik ontmoette hem op een feest.",
+        "en": "I met him at a party.",
+        "highlightNl": "ontmoette",
+        "highlightEn": "met"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb haar al eerder ontmoet.",
+        "en": "I have met her before.",
+        "highlightNl": "ontmoet",
+        "highlightEn": "met"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"ontmoeten\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (ontmoette), en ge- + stam + -d/-t voor het voltooid deelwoord (ontmoet), gebruikt met \"hebben\".",
+      "en": "\"ontmoeten\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"ontmoette\") and a ge-...-d/t form for the past participle (\"ontmoet\"), paired with \"hebben\" (to have)."
+    }
+  },
+  "deck1-1777122683480": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik wil je snel weer zien.",
+        "en": "I want to see you again soon.",
+        "highlightNl": "zien",
+        "highlightEn": "see"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik zag hem gisteren op straat.",
+        "en": "I saw him on the street yesterday.",
+        "highlightNl": "zag",
+        "highlightEn": "saw"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb die film al gezien.",
+        "en": "I have already seen that movie.",
+        "highlightNl": "gezien",
+        "highlightEn": "seen"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"zien\" is een sterk (onregelmatig) werkwoord: de klinker verandert (zag, gezien) in plaats van een vaste uitgang. Gebruikt \"hebben\".",
+      "en": "\"zien\" is a strong (irregular) verb — the vowel itself changes for the past tense (\"zag\") and past participle (\"gezien\"), similar to English irregular verbs like give→gave→given. It still takes \"hebben\" (to have) in the perfect tense."
+    }
+  },
+  "deck1-1777122683482": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik wil naar een film kijken.",
+        "en": "I want to watch a movie.",
+        "highlightNl": "kijken",
+        "highlightEn": "watch"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik keek gisteren naar het nieuws.",
+        "en": "I watched the news yesterday.",
+        "highlightNl": "keek",
+        "highlightEn": "watched"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb naar de wedstrijd gekeken.",
+        "en": "I have watched the match.",
+        "highlightNl": "gekeken",
+        "highlightEn": "watched"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"kijken\" is een sterk (onregelmatig) werkwoord: de klinker verandert (keek, gekeken) in plaats van een vaste uitgang. Gebruikt \"hebben\".",
+      "en": "\"kijken\" is a strong (irregular) verb — the vowel itself changes for the past tense (\"keek\") and past participle (\"gekeken\"), similar to English irregular verbs like give→gave→given. It still takes \"hebben\" (to have) in the perfect tense."
+    }
+  },
+  "deck1-1777122683490": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Dit gerecht smaakt naar knoflook.",
+        "en": "This dish tastes like garlic.",
+        "highlightNl": "smaakt",
+        "highlightEn": "tastes"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Het smaakte precies zoals thuis.",
+        "en": "It tasted just like home.",
+        "highlightNl": "smaakte",
+        "highlightEn": "tasted"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Het eten heeft heerlijk gesmaakt.",
+        "en": "The food tasted delicious.",
+        "highlightNl": "gesmaakt",
+        "highlightEn": "tasted"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"smaken\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (smaakte), en ge- + stam + -d/-t voor het voltooid deelwoord (gesmaakt), gebruikt met \"hebben\".",
+      "en": "\"smaken\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"smaakte\") and a ge-...-d/t form for the past participle (\"gesmaakt\"), paired with \"hebben\" (to have)."
+    }
+  },
+  "deck1-1777122683492": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Wil je deze soep proeven?",
+        "en": "Do you want to taste this soup?",
+        "highlightNl": "proeven",
+        "highlightEn": "taste"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik proefde meteen de kaneel.",
+        "en": "I immediately tasted the cinnamon.",
+        "highlightNl": "proefde",
+        "highlightEn": "tasted"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb nog nooit sushi geproefd.",
+        "en": "I have never tasted sushi.",
+        "highlightNl": "geproefd",
+        "highlightEn": "tasted"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"proeven\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (proefde), en ge- + stam + -d/-t voor het voltooid deelwoord (geproefd), gebruikt met \"hebben\".",
+      "en": "\"proeven\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"proefde\") and a ge-...-d/t form for the past participle (\"geproefd\"), paired with \"hebben\" (to have)."
+    }
+  },
+  "deck1-1777122683494": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik kan de kou voelen.",
+        "en": "I can feel the cold.",
+        "highlightNl": "voelen",
+        "highlightEn": "feel"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik voelde me gisteren ziek.",
+        "en": "I felt sick yesterday.",
+        "highlightNl": "voelde",
+        "highlightEn": "felt"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb dat nooit eerder gevoeld.",
+        "en": "I have never felt that before.",
+        "highlightNl": "gevoeld",
+        "highlightEn": "felt"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"voelen\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (voelde), en ge- + stam + -d/-t voor het voltooid deelwoord (gevoeld), gebruikt met \"hebben\".",
+      "en": "\"voelen\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"voelde\") and a ge-...-d/t form for the past participle (\"gevoeld\"), paired with \"hebben\" (to have)."
+    }
+  },
+  "deck1-1777122683502": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Het gaat morgen regenen.",
+        "en": "It is going to rain tomorrow.",
+        "highlightNl": "regenen",
+        "highlightEn": "rain"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Het regende de hele dag.",
+        "en": "It rained all day.",
+        "highlightNl": "regende",
+        "highlightEn": "rained"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Het heeft de hele nacht geregend.",
+        "en": "It has rained all night.",
+        "highlightNl": "geregend",
+        "highlightEn": "rained"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"regenen\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (regende), en ge- + stam + -d/-t voor het voltooid deelwoord (geregend), gebruikt met \"hebben\".",
+      "en": "\"regenen\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"regende\") and a ge-...-d/t form for the past participle (\"geregend\"), paired with \"hebben\" (to have)."
+    }
+  },
+  "deck1-1777122683612": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik denk vaak aan jou.",
+        "en": "I often think of you.",
+        "highlightNl": "denk",
+        "highlightEn": "think"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik dacht aan mijn familie.",
+        "en": "I thought of my family.",
+        "highlightNl": "dacht aan",
+        "highlightEn": "thought of"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb er lang aan gedacht.",
+        "en": "I have thought about it for a long time.",
+        "highlightNl": "gedacht",
+        "highlightEn": "thought"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Denken\" is onregelmatig (dacht, gedacht) en hoort samen met het vaste voorzetsel \"aan\".",
+      "en": "\"Denken\" (to think) is irregular in the past (dacht, gedacht) and locks in the preposition \"aan\" (\"denken aan\" = \"think of/about\")."
+    }
+  },
+  "deck1-1777122683624": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik wacht op de bus.",
+        "en": "I am waiting for the bus.",
+        "highlightNl": "wacht op",
+        "highlightEn": "waiting for"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik wachtte een uur op haar.",
+        "en": "I waited an hour for her.",
+        "highlightNl": "wachtte",
+        "highlightEn": "waited"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb lang op je gewacht.",
+        "en": "I have waited a long time for you.",
+        "highlightNl": "gewacht",
+        "highlightEn": "waited"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Wachten\" hoort samen met het voorzetsel \"op\" — letterlijk \"wachten op\" = \"wait on\", niet \"wait for\".",
+      "en": "Dutch pairs \"wachten\" with \"op\" (literally \"wait on\"), where English says \"wait for\" — a classic case of prepositions not matching between the two languages."
+    }
+  },
+  "deck1-1777122683626": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik geniet van de zon.",
+        "en": "I enjoy the sun.",
+        "highlightNl": "geniet van",
+        "highlightEn": "enjoy"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik genoot van de vakantie.",
+        "en": "I enjoyed the vacation.",
+        "highlightNl": "genoot van",
+        "highlightEn": "enjoyed"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb enorm van het eten genoten.",
+        "en": "I have enjoyed the food enormously.",
+        "highlightNl": "genoten",
+        "highlightEn": "enjoyed"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Genieten\" is sterk (genoot, genoten) en hoort samen met \"van\" — letterlijk \"genieten van\" = \"enjoy of\".",
+      "en": "\"Genieten\" (to enjoy) is a strong verb (genoot, genoten) that pairs with \"van\", literally \"enjoy of\" — English drops the preposition entirely (\"enjoy the food\", no \"of\")."
+    }
+  },
+  "deck1-1777122683628": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik wil medicijnen studeren.",
+        "en": "I want to study medicine.",
+        "highlightNl": "studeren",
+        "highlightEn": "study"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik studeerde vier jaar in Utrecht.",
+        "en": "I studied for four years in Utrecht.",
+        "highlightNl": "studeerde",
+        "highlightEn": "studied"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb rechten gestudeerd.",
+        "en": "I have studied law.",
+        "highlightNl": "gestudeerd",
+        "highlightEn": "studied"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"studeren\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (studeerde), en ge- + stam + -d/-t voor het voltooid deelwoord (gestudeerd), gebruikt met \"hebben\".",
+      "en": "\"studeren\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"studeerde\") and a ge-...-d/t form for the past participle (\"gestudeerd\"), paired with \"hebben\" (to have)."
+    }
+  },
+  "deck1-1777122683630": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Wij koken avondeten.",
+        "en": "We cook dinner.",
+        "highlightNl": "koken",
+        "highlightEn": "cook"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Het water kookte al.",
+        "en": "The water was already boiling.",
+        "highlightNl": "kookte",
+        "highlightEn": "boiling"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb pasta gekookt.",
+        "en": "I have cooked pasta.",
+        "highlightNl": "gekookt",
+        "highlightEn": "cooked"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"koken\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (kookte), en ge- + stam + -d/-t voor het voltooid deelwoord (gekookt), gebruikt met \"hebben\".",
+      "en": "\"koken\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"kookte\") and a ge-...-d/t form for the past participle (\"gekookt\"), paired with \"hebben\" (to have)."
+    }
+  },
+  "deck1-1777122683636": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik wil dokter worden.",
+        "en": "I want to become a doctor.",
+        "highlightNl": "worden",
+        "highlightEn": "become"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Hij werd boos.",
+        "en": "He became angry.",
+        "highlightNl": "werd",
+        "highlightEn": "became"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ze is heel beroemd geworden.",
+        "en": "She has become very famous.",
+        "highlightNl": "geworden",
+        "highlightEn": "become"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Worden\" is onregelmatig (werd, geworden) en gebruikt \"zijn\" als hulpwerkwoord. Het wordt ook gebruikt om de lijdende vorm te maken (bijv. \"het huis wordt gebouwd\").",
+      "en": "\"Worden\" (to become) is irregular and uses \"zijn\" as its auxiliary. It also doubles as the Dutch passive-voice helper (like English \"to be\" in \"the house is being built\"), which has no single English equivalent."
+    }
+  },
+  "deck1-1777122683638": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik kan mijn sleutels niet vinden.",
+        "en": "I cannot find my keys.",
+        "highlightNl": "vinden",
+        "highlightEn": "find"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik vond een leuke winkel.",
+        "en": "I found a nice store.",
+        "highlightNl": "vond",
+        "highlightEn": "found"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb mijn telefoon gevonden.",
+        "en": "I have found my phone.",
+        "highlightNl": "gevonden",
+        "highlightEn": "found"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"vinden\" is een sterk (onregelmatig) werkwoord: de klinker verandert (vond, gevonden) in plaats van een vaste uitgang. Gebruikt \"hebben\".",
+      "en": "\"vinden\" is a strong (irregular) verb — the vowel itself changes for the past tense (\"vond\") and past participle (\"gevonden\"), similar to English irregular verbs like give→gave→given. It still takes \"hebben\" (to have) in the perfect tense."
+    }
+  },
+  "deck1-1777122683640": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik wil je een cadeau geven.",
+        "en": "I want to give you a gift.",
+        "highlightNl": "geven",
+        "highlightEn": "give"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik gaf haar mijn nummer.",
+        "en": "I gave her my number.",
+        "highlightNl": "gaf",
+        "highlightEn": "gave"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb hem het boek gegeven.",
+        "en": "I have given him the book.",
+        "highlightNl": "gegeven",
+        "highlightEn": "given"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Geven\" is een sterk werkwoord (gaf, gegeven), net als het Engelse give-gave-given. Het \"aan\" is optioneel: \"ik geef het boek (aan) hem\".",
+      "en": "\"Geven\" follows almost the same pattern as English give→gave→given. The \"aan\" (to) is often optional when the receiver is clear from word order."
+    }
+  },
+  "deck1-1777122683642": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik wil de trein nemen.",
+        "en": "I want to take the train.",
+        "highlightNl": "nemen",
+        "highlightEn": "take"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik nam een grote hap.",
+        "en": "I took a big bite.",
+        "highlightNl": "nam",
+        "highlightEn": "took"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb de trein genomen.",
+        "en": "I have taken the train.",
+        "highlightNl": "genomen",
+        "highlightEn": "taken"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"nemen\" is een sterk (onregelmatig) werkwoord: de klinker verandert (nam, genomen) in plaats van een vaste uitgang. Gebruikt \"hebben\".",
+      "en": "\"nemen\" is a strong (irregular) verb — the vowel itself changes for the past tense (\"nam\") and past participle (\"genomen\"), similar to English irregular verbs like give→gave→given. It still takes \"hebben\" (to have) in the perfect tense."
+    }
+  },
+  "deck1-1777122683646": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik wil graag een antwoord ontvangen.",
+        "en": "I'd like to receive an answer.",
+        "highlightNl": "ontvangen",
+        "highlightEn": "receive"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik ontving gisteren een pakketje.",
+        "en": "I received a package yesterday.",
+        "highlightNl": "ontving",
+        "highlightEn": "received"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb je bericht ontvangen.",
+        "en": "I have received your message.",
+        "highlightNl": "ontvangen",
+        "highlightEn": "received"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"ontvangen\" is een sterk (onregelmatig) werkwoord: de klinker verandert (ontving, ontvangen) in plaats van een vaste uitgang. Gebruikt \"hebben\".",
+      "en": "\"ontvangen\" is a strong (irregular) verb — the vowel itself changes for the past tense (\"ontving\") and past participle (\"ontvangen\"), similar to English irregular verbs like give→gave→given. It still takes \"hebben\" (to have) in the perfect tense."
+    }
+  },
+  "deck1-1777122683648": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik wil dat graag weten.",
+        "en": "I'd like to know that.",
+        "highlightNl": "weten",
+        "highlightEn": "know"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik wist het antwoord niet.",
+        "en": "I did not know the answer.",
+        "highlightNl": "wist",
+        "highlightEn": "know"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb dat altijd geweten.",
+        "en": "I have always known that.",
+        "highlightNl": "geweten",
+        "highlightEn": "known"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Weten\" gaat over feiten (informatie), terwijl \"kennen\" over bekendheid met personen/plaatsen gaat.",
+      "en": "Dutch splits \"to know\" into two verbs: \"weten\" for FACTS/information (\"I know the answer\"), and \"kennen\" for being FAMILIAR with a person or place (\"I know her\"). English uses \"know\" for both."
+    }
+  },
+  "deck1-1777122683650": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik wil hem graag kennen.",
+        "en": "I'd like to know him.",
+        "highlightNl": "kennen",
+        "highlightEn": "know"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik kende haar al jaren.",
+        "en": "I had known her for years.",
+        "highlightNl": "kende",
+        "highlightEn": "known"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb die stad altijd gekend.",
+        "en": "I have always known that city.",
+        "highlightNl": "gekend",
+        "highlightEn": "known"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"kennen\" is een regelmatig werkwoord: stam + -de/-te voor de verleden tijd (kende), en ge- + stam + -d/-t voor het voltooid deelwoord (gekend), gebruikt met \"hebben\".",
+      "en": "\"kennen\" is a regular verb. English just adds -ed for both the past tense and past participle, but Dutch uses a separate -de/-te form for the past tense (\"kende\") and a ge-...-d/t form for the past participle (\"gekend\"), paired with \"hebben\" (to have)."
+    }
+  },
+  "deck1-1777122683652": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik moet dit stevig vasthouden.",
+        "en": "I need to hold this firmly.",
+        "highlightNl": "vasthouden",
+        "highlightEn": "hold"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik hield het kopje vast.",
+        "en": "I held the cup.",
+        "highlightNl": "hield",
+        "highlightEn": "held"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik heb haar hand vastgehouden.",
+        "en": "I have held her hand.",
+        "highlightNl": "vastgehouden",
+        "highlightEn": "held"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Vasthouden\" is een scheidbaar werkwoord: \"vast\" staat los aan het einde in de tegenwoordige/verleden tijd, maar plakt weer vast in het voltooid deelwoord (\"vastgehouden\").",
+      "en": "\"Vasthouden\" is a separable verb: the prefix \"vast\" detaches and moves to the end of the sentence in the present/past tense, but reattaches for the past participle. English phrasal verbs like \"hold on to\" don't split apart like this."
+    }
+  },
+  "deck1-1777122683760": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Laten we morgen afspreken.",
+        "en": "Let's make plans to meet tomorrow.",
+        "highlightNl": "afspreken",
+        "highlightEn": "meet"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik sprak gisteren met haar af.",
+        "en": "I made plans with her yesterday.",
+        "highlightNl": "sprak",
+        "highlightEn": "made plans"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "We hebben om drie uur afgesproken.",
+        "en": "We have agreed to meet at three.",
+        "highlightNl": "afgesproken",
+        "highlightEn": "agreed to meet"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Afspreken\" is scheidbaar: \"af\" staat los aan het einde in de tegenwoordige/verleden tijd, maar wordt weer vastgeplakt in het voltooid deelwoord (\"afgesproken\").",
+      "en": "\"Afspreken\" (af + spreken) is separable: \"af\" detaches to the end of the clause in present/past tense, then reattaches for the past participle — a pattern English simply doesn't have."
+    }
+  },
+  "deck1-1777122682942": {
+    "sentences": [
+      {
+        "formLabel": "infinitive",
+        "nl": "Ik ga morgen werken.",
+        "en": "I am going to work tomorrow.",
+        "highlightNl": "ga",
+        "highlightEn": "going"
+      },
+      {
+        "formLabel": "past tense",
+        "nl": "Ik ging gisteren naar de winkel.",
+        "en": "I went to the store yesterday.",
+        "highlightNl": "ging",
+        "highlightEn": "went"
+      },
+      {
+        "formLabel": "past participle",
+        "nl": "Ik ben al naar huis gegaan.",
+        "en": "I have already gone home.",
+        "highlightNl": "gegaan",
+        "highlightEn": "gone"
+      }
+    ],
+    "grammarNote": {
+      "nl": "\"Gaan\" is een sterk werkwoord van beweging (ging, gegaan) en gebruikt \"zijn\", niet \"hebben\", als hulpwerkwoord.",
+      "en": "\"Gaan\" (to go) is a strong motion verb, like English go→went→gone. It takes \"zijn\" (to be) as its auxiliary in the perfect tense, where English always uses \"have\"."
+    }
   }
 }
