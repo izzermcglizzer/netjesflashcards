@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { getExampleForWord, getComponentExamples, type SentenceExample } from '../../data/sentenceExamples'
 import { splitLines } from '../../utils/html'
 import type { Word } from '../../data/words.types'
@@ -43,6 +43,7 @@ function ExampleRow({ example }: { example: SentenceExample }) {
  * yet, and renders nothing at all if there's neither.
  */
 export function ExampleSentencePanel({ word }: { word: Word }) {
+  const [expanded, setExpanded] = useState(false)
   const example = getExampleForWord(word.id)
   const noteLines = [...splitLines(word.notesNl), ...splitLines(word.notesEn)]
 
@@ -50,51 +51,60 @@ export function ExampleSentencePanel({ word }: { word: Word }) {
 
   return (
     <div className="w-full rounded-2xl bg-brand-blue/8 p-4 text-left">
-      <div className="mb-3 flex items-center gap-2">
+      <button
+        type="button"
+        onClick={() => setExpanded((e) => !e)}
+        className="flex w-full items-center gap-2"
+      >
         <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-blue/15 text-sm text-brand-blue">
           💬
         </span>
-        <p className="text-xs font-extrabold uppercase tracking-wide text-ink-light">Examples</p>
-      </div>
+        <p className="flex-1 text-xs font-extrabold uppercase tracking-wide text-ink-light">
+          {expanded ? 'Hide examples' : 'Show examples'}
+        </p>
+        <span className={`text-ink-light transition-transform ${expanded ? 'rotate-180' : ''}`}>▾</span>
+      </button>
 
-      <div className="rounded-xl bg-white p-3">
-        {example ? (
-          <>
-            {example.sentences.map((s, i) => (
-              <Fragment key={i}>
-                {i > 0 && <div className="my-3 border-t border-dashed border-cloud-dark" />}
-                <ExampleRow example={s} />
-              </Fragment>
-            ))}
+      {expanded && (
+        <div className="mt-3 rounded-xl bg-white p-3">
+          {example ? (
+            <>
+              {example.sentences.map((s, i) => (
+                <Fragment key={i}>
+                  {i > 0 && <div className="my-3 border-t border-dashed border-cloud-dark" />}
+                  <ExampleRow example={s} />
+                </Fragment>
+              ))}
 
-            {example.components?.map((token) => {
-              const comp = getComponentExamples(token)?.[0]
-              if (!comp) return null
-              return (
-                <div key={token} className="mt-3 rounded-lg bg-cloud px-3 py-2">
-                  <p className="text-xs font-bold uppercase text-ink-light">{token}</p>
-                  <p className="text-sm text-ink">{comp.nl}</p>
-                  <p className="text-xs text-ink-light">{comp.en}</p>
+              {example.components?.map((token) => {
+                const comp = getComponentExamples(token)?.[0]
+                if (!comp) return null
+                return (
+                  <div key={token} className="mt-3 rounded-lg bg-cloud px-3 py-2">
+                    <p className="text-xs font-bold uppercase text-ink-light">{token}</p>
+                    <p className="text-sm text-ink">{comp.nl}</p>
+                    <p className="text-xs text-ink-light">{comp.en}</p>
+                  </div>
+                )
+              })}
+
+              {example.grammarNote && (
+                <div className="mt-3 rounded-lg border-2 border-brand-blue/20 bg-brand-blue/5 px-3 py-2">
+                  <p className="text-xs font-extrabold uppercase text-brand-blue">How this verb works</p>
+                  <p className="mt-1 text-sm text-ink">{example.grammarNote.nl}</p>
+                  <p className="mt-1 text-xs text-ink-light">{example.grammarNote.en}</p>
                 </div>
-              )
-            })}
-
-            {example.grammarNote && (
-              <div className="mt-3 rounded-lg border-2 border-brand-blue/20 bg-brand-blue/5 px-3 py-2">
-                <p className="text-xs font-extrabold uppercase text-brand-blue">How this verb works</p>
-                <p className="mt-1 text-sm text-ink">{example.grammarNote.nl}</p>
-                <p className="mt-1 text-xs text-ink-light">{example.grammarNote.en}</p>
-              </div>
-            )}
-          </>
-        ) : (
-          noteLines.map((line, i) => (
-            <p key={i} className="text-sm text-ink-light">
-              {line}
-            </p>
-          ))
-        )}
-      </div>
+              )}
+            </>
+          ) : (
+            noteLines.map((line, i) => (
+              <p key={i} className="text-sm text-ink-light">
+                {line}
+              </p>
+            ))
+          )}
+        </div>
+      )}
     </div>
   )
 }
