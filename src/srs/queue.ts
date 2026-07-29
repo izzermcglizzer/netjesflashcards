@@ -58,19 +58,23 @@ export function buildChapterPracticeQueue(words: Word[], cardStates: Map<string,
 }
 
 /**
- * SRS-due words only (like buildQueue), optionally capped to `count` — used
- * by Custom Practice's "all due words" source. If there are more due words
- * than requested, a random subset is sampled rather than always taking the
- * same chapter-ordered prefix.
+ * Custom Practice's default source: `count` already-learned words, sampled
+ * across chapters, with NO due-date filtering at all — the user explicitly
+ * picked how many cards to practice, so gating by SRS due-date (like Quick
+ * Recap does) would be surprising and often show nothing to practice.
  */
-export function buildDueQueue(
+export function buildAllLearnedQueue(
   words: Word[],
   cardStates: Map<string, CardState>,
-  opts: { today: string; count?: number | null },
+  count: number,
 ): QueueItem[] {
-  const due = buildQueue(words, cardStates, { today: opts.today })
-  if (!opts.count || opts.count >= due.length) return due
-  return shuffleInPlace([...due]).slice(0, opts.count)
+  const sampled = sampleAcrossChapters(words, cardStates, count)
+  return sampled
+    .map((word) => {
+      const state = cardStates.get(word.id)
+      return state ? { word, state } : null
+    })
+    .filter((item): item is QueueItem => item !== null)
 }
 
 /**

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
   buildChapterPracticeQueue,
-  buildDueQueue,
+  buildAllLearnedQueue,
   buildQueue,
   buildRecentlyLearnedQueue,
   compareChapters,
@@ -183,28 +183,28 @@ describe('sampleAcrossChapters', () => {
   })
 })
 
-describe('buildDueQueue', () => {
-  it('returns only due words when no count is given', () => {
+describe('buildAllLearnedQueue', () => {
+  it('includes learned words regardless of due date', () => {
     const words = [makeWord('a', '1-1'), makeWord('b', '1-1')]
     const cardStates = new Map([
       ['a', dueState(TODAY)],
-      ['b', dueState('2099-01-01')],
+      ['b', dueState('2099-01-01')], // not due for a long time, still eligible
     ])
-    const queue = buildDueQueue(words, cardStates, { today: TODAY })
+    const queue = buildAllLearnedQueue(words, cardStates, 10)
+    expect(queue.map((item) => item.word.id).sort()).toEqual(['a', 'b'])
+  })
+
+  it('excludes never-learned words', () => {
+    const words = [makeWord('a', '1-1'), makeWord('b', '1-1')]
+    const cardStates = new Map([['a', dueState(TODAY)]])
+    const queue = buildAllLearnedQueue(words, cardStates, 10)
     expect(queue.map((item) => item.word.id)).toEqual(['a'])
   })
 
-  it('caps to count, sampling when there are more due words than requested', () => {
+  it('caps to the requested count', () => {
     const words = Array.from({ length: 20 }, (_, i) => makeWord(`w${i}`, '1-1'))
     const cardStates = new Map(words.map((w) => [w.id, dueState(TODAY)]))
-    const queue = buildDueQueue(words, cardStates, { today: TODAY, count: 5 })
-    expect(queue).toHaveLength(5)
-  })
-
-  it('returns all due words unmodified when count exceeds availability', () => {
-    const words = [makeWord('a', '1-1'), makeWord('b', '1-1')]
-    const cardStates = new Map(words.map((w) => [w.id, dueState(TODAY)]))
-    expect(buildDueQueue(words, cardStates, { today: TODAY, count: 10 })).toHaveLength(2)
+    expect(buildAllLearnedQueue(words, cardStates, 5)).toHaveLength(5)
   })
 })
 

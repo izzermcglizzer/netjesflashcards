@@ -110,16 +110,16 @@ export function StatsAchievements() {
       <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
         <Card>
           <p className="mb-3 font-extrabold text-ink">Last 7 days</p>
-          <div className="flex h-32 items-end gap-2 sm:gap-3">
+          <div className="flex h-32 gap-2 sm:gap-3">
             {countsByDay.map((count, i) => (
               <div key={days[i]} className="flex min-w-0 flex-1 flex-col items-center gap-2">
-                <div className="flex h-full w-full items-end rounded-t-lg bg-brand-green/15">
+                <div className="flex w-full flex-1 items-end rounded-t-lg bg-brand-green/15">
                   <div
                     className="w-full rounded-t-lg bg-brand-green"
                     style={{ height: `${Math.max((count / maxCount) * 100, count > 0 ? 8 : 0)}%` }}
                   />
                 </div>
-                <p className="text-[10px] font-bold text-ink-light sm:text-xs">{days[i].slice(8, 10)}</p>
+                <p className="shrink-0 text-[10px] font-bold text-ink-light sm:text-xs">{days[i].slice(8, 10)}</p>
               </div>
             ))}
           </div>

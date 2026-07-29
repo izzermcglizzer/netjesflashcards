@@ -4,7 +4,7 @@ import { useAuth } from '../../auth/AuthContext'
 import { getWordsForDeck } from '../../data'
 import { getCardStatesForDeck } from '../../api/cardState'
 import { ensureProfile, type Profile } from '../../api/profile'
-import { buildDueQueue, buildRecentlyLearnedQueue, type QueueItem } from '../../srs/queue'
+import { buildAllLearnedQueue, buildRecentlyLearnedQueue, type QueueItem } from '../../srs/queue'
 import { StudyModeRenderer, type PracticeMode } from '../study/StudyModeRenderer'
 import { LearnCard } from '../study/modes/LearnCard'
 import { useGradedSession, toSessionItems, type SessionItem } from '../study/useGradedSession'
@@ -19,10 +19,6 @@ import type { DeckId } from '../../data/words.types'
 
 const VALID_MODES = new Set<PracticeMode>(['classic', 'multipleChoice', 'typing', 'listening'])
 
-function todayIso(): string {
-  return new Date().toISOString().slice(0, 10)
-}
-
 function parseModes(raw: string | null): PracticeMode[] {
   const modes = (raw ?? '').split(',').filter((m): m is PracticeMode => VALID_MODES.has(m as PracticeMode))
   return modes.length > 0 ? modes : ['classic']
@@ -32,7 +28,7 @@ export function CustomPracticeSession() {
   const { deckId } = useParams<{ deckId: string }>()
   const [searchParams] = useSearchParams()
   const modes = useMemo(() => parseModes(searchParams.get('modes')), [searchParams])
-  const source: PracticeSource = searchParams.get('source') === 'recent' ? 'recent' : 'due'
+  const source: PracticeSource = searchParams.get('source') === 'recent' ? 'recent' : 'all'
   const count = Number.parseInt(searchParams.get('count') ?? '', 10) || 10
 
   const navigate = useNavigate()
@@ -50,11 +46,11 @@ export function CustomPracticeSession() {
     let cancelled = false
     getCardStatesForDeck(userId, deckId as DeckId).then((cardStates) => {
       if (cancelled) return
-      const due: QueueItem[] =
+      const picked: QueueItem[] =
         source === 'recent'
           ? buildRecentlyLearnedQueue(deckWords, cardStates, count)
-          : buildDueQueue(deckWords, cardStates, { today: todayIso(), count })
-      setInitialItems(toSessionItems(shuffle(due), () => shuffle(modes)[0]))
+          : buildAllLearnedQueue(deckWords, cardStates, count)
+      setInitialItems(toSessionItems(shuffle(picked), () => shuffle(modes)[0]))
     })
     return () => {
       cancelled = true
@@ -99,7 +95,7 @@ export function CustomPracticeSession() {
             </p>
           </>
         ) : (
-          <p className="text-xl font-bold">All caught up! Nothing due to practice right now.</p>
+          <p className="text-xl font-bold">No learned words yet in this level.</p>
         )}
         <button
           type="button"

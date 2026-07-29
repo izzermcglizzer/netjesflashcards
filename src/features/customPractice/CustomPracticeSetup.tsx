@@ -21,7 +21,7 @@ const MODES: { id: PracticeMode; label: string; subtitle: string; icon: string; 
   { id: 'listening', label: 'Listening', subtitle: 'Listen and understand', icon: '🎧', pose: 'headphones' },
 ]
 
-const DUE_QUICK_PICKS = [5, 10, 20]
+const ALL_QUICK_PICKS = [5, 10, 20]
 const RECENT_QUICK_PICKS = [20, 30, 40, 50]
 
 function todayIso(): string {
@@ -35,7 +35,7 @@ export function CustomPracticeSetup() {
   const deck = decks.find((d) => d.id === deckId)
   const [progress, setProgress] = useState<DeckProgress | null>(null)
   const [selectedModes, setSelectedModes] = useState<PracticeMode[]>(['classic'])
-  const [source, setSource] = useState<PracticeSource>('due')
+  const [source, setSource] = useState<PracticeSource>('all')
   const [count, setCount] = useState(10)
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export function CustomPracticeSetup() {
 
   if (!deck) return null
 
-  const quickPicks = source === 'recent' ? RECENT_QUICK_PICKS : DUE_QUICK_PICKS
+  const quickPicks = source === 'recent' ? RECENT_QUICK_PICKS : ALL_QUICK_PICKS
   const maxCount = progress?.studied ?? 1
 
   return (
@@ -142,15 +142,15 @@ export function CustomPracticeSetup() {
           <Card className="flex items-center justify-between gap-3">
             <div>
               <p className="font-extrabold text-ink">
-                {source === 'recent' ? 'Last words I learned' : 'All due words'}
+                {source === 'recent' ? 'Last words I learned' : 'All learned words'}
               </p>
               <p className="text-sm text-ink-light">
                 {source === 'recent'
-                  ? "Drill just the newest words you've learned, ignoring what's due today"
-                  : "Practice from what's due for review today"}
+                  ? "Drill just the newest words you've learned"
+                  : 'Practice a random mix of everything you know'}
               </p>
             </div>
-            <Toggle checked={source === 'recent'} onChange={(checked) => setSource(checked ? 'recent' : 'due')} />
+            <Toggle checked={source === 'recent'} onChange={(checked) => setSource(checked ? 'recent' : 'all')} />
           </Card>
 
           <Card className="space-y-4 bg-brand-purple/8">
